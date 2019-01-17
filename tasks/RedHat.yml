@@ -1,0 +1,16 @@
+---
+- name: Add Elasticsearch YUM repositories
+  yum_repository:
+    name: '{{ elasticsearch_repo_name }}'
+    description: '{{ elasticsearch_repo_name }} YUM repository'
+    file: '{{ elasticsearch_repo_name }}'
+    baseurl: '{{ elasticsearch_repo_url }}'
+    gpgcheck: no
+
+- name: Install the Elasticsearch packages
+  yum:
+    name: '{{ item }}'
+    state: 'present'
+  with_items:
+    - '{{ elasticsearch_packages }}'
+  register: es_update

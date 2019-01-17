@@ -1,2 +1,27 @@
 ---
-# vars file for ansible-role-linux-elasticsearch
+elasticsearch_folder:
+  - '{{ elasticsearch_path }}/elasticsearch'
+
+elasticsearch_conf_scripts:
+  - { src: 'elasticsearch.service.j2',   dest: '/lib/systemd/system/elasticsearch.service' }
+  - { src: 'elasticsearch.yml.j2',       dest: '/etc/elasticsearch/elasticsearch.yml' }
+  - { src: 'elasticsearch.sysconfig.j2', dest: '/etc/sysconfig/elasticsearch' }
+  - { src: 'jvm.options.j2',             dest: '/etc/elasticsearch/jvm.options' }
+
+elasticsearch_kernel_parameters:
+  - { variable: 'vm.max_map_count', value: '262144' }
+  - { variable: 'vm.swappiness', value: '10' }
+
+elasticsearch_servers: "\
+  {% set _elasticsearch_servers = [] %}\
+  {% for host in groups[group_names[-1]] %}\
+    {% set _elasticsearch_cluster_name = hostvars[host]['elasticsearch_cluster_name'] | default('', true) %}\
+    {% if ( _elasticsearch_cluster_name == hostvars[host]['elasticsearch_cluster_name']) %}\
+      {% if _elasticsearch_servers.append(hostvars[host]['ansible_host']) %}{% endif %}\
+    {% endif %}\
+  {% endfor %}\
+  {{ _elasticsearch_servers }}"
+
+elasticsearch_exporter_collector:
+#  - 'es.all'
+  - 'es.indices'

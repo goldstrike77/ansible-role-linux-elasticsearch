@@ -1,0 +1,32 @@
+---
+- name: Creating Elasticsearch folder
+  file:
+    dest: '{{ item }}'
+    state: directory
+    owner: elasticsearch
+    group: elasticsearch
+    mode: 0755
+  with_items:
+    - '{{ elasticsearch_folder }}'
+
+- name: Configure kernel parameters
+  sysctl:
+    name: '{{ item.variable }}'
+    value: '{{ item.value }}'
+    state: present
+    reload: yes
+    sysctl_set: yes
+    sysctl_file: /etc/sysctl.d/20-sysctl.conf
+  with_items:
+    - '{{ elasticsearch_kernel_parameters }}'
+
+- name: Elasticsearch Configure & Scripts file transfer
+  template:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - '{{ elasticsearch_conf_scripts }}'
+  register: es_config

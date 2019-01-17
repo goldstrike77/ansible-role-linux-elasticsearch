@@ -1,2 +1,20 @@
 ---
-# tasks file for ansible-role-linux-elasticsearch
+- name: Include firewall tasks
+  include: 'firewall.yml'
+
+- name: Include OS-specific variables
+  include_vars: '{{ ansible_os_family }}.yml'
+
+- name: Include tasks for specific OS
+  include: '{{ ansible_os_family }}.yml'
+
+- name: Configuration the consul
+  include: 'configureation.yml'
+
+- name: Reload the Elasticsearch service
+  shell: echo ''
+  notify: 'Ensure Elasticsearch service is enabled'
+  when: es_update|changed or es_config|changed
+
+- name: Include prometheus exporter tasks
+  include: 'exporter.yml'

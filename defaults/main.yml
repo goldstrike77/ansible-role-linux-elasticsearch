@@ -1,2 +1,17 @@
 ---
-# defaults file for ansible-role-linux-elasticsearch
+# General parameters #
+#elasticsearch_cluster_name: 'elasticsearch' # Specify name for your cluster
+elasticsearch_version: '5' # Specify the Elasticsearch version, minimum 5
+elasticsearch_path: '/data' # Specify the Elasticsearch data directory
+
+# Listen port #
+elasticsearch_port_arg:
+  rest: '9200' # Elasticsearch REST
+  node: '9300' # Elasticsearch nodes communication
+  elasticsearch_exporter: '9108' # Prometheus Elasticsearch Exporter
+
+# Server System Variables #
+elasticsearch_arg:
+  action_destructive_requires_name: 'true'
+  bootstrap_memory_lock: 'false'
+  es_heap_size: 4G

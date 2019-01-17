@@ -1,0 +1,33 @@
+---
+- name: Add Prometheus elasticsearch exporter YUM repositories
+  yum_repository:
+    name: '{{ elasticsearch_exporter_repo_name }}'
+    description: '{{ elasticsearch_exporter_repo_name }} YUM repository'
+    file: '{{ elasticsearch_exporter_repo_name }}'
+    baseurl: '{{ elasticsearch_exporter_repo_url }}'
+    gpgcheck: no
+
+- name: Install the Prometheus elasticsearch exporter packages
+  yum:
+    name: '{{ item }}'
+    state: 'present'
+  with_items:
+    - '{{ elasticsearch_exporter_packages }}'
+
+- name: Prometheus elasticsearch exporter configure file transfer
+  template:
+    src: 'elasticsearch_exporter.default.j2'
+    dest: '/etc/default/elasticsearch_exporter'
+    owner: 'root'
+    group: 'root'
+    mode: 0644
+  register: conf_update
+
+- name: Prometheus elasticsearch exporter service is enabled
+  systemd:
+    name: 'elasticsearch_exporter.service'
+    enabled: 'yes'
+    state: 'restarted'
+    daemon_reload: yes
+  when:
+    - conf_update|changed
