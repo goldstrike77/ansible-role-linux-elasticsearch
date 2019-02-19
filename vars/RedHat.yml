@@ -1,7 +1,8 @@
 ---
 disable_gpg_check: yes
 elasticsearch_repo_name: 'elasticsearch'
-elasticsearch_repo_url: 'http://artifacts.elastic.co/packages/{{ elasticsearch_version }}.x/yum'
+elasticsearch_packages_repo_url: 'http://packages.elastic.co/elasticsearch/{{ elasticsearch_version }}.x/centos'
+elasticsearch_artifacts_repo_url: 'http://artifacts.elastic.co/packages/{{ elasticsearch_version }}.x/yum'
 elasticsearch_packages:
   - 'java-1.8.0-openjdk'
   - 'elasticsearch'

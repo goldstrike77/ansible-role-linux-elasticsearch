@@ -1,7 +1,7 @@
 ---
 # General parameters #
 #elasticsearch_cluster_name: 'elasticsearch' # Specify name for your cluster
-elasticsearch_version: '5' # Specify the Elasticsearch version, minimum 5
+elasticsearch_version: '2' # Specify the Elasticsearch version, minimum 2
 elasticsearch_path: '/data' # Specify the Elasticsearch data directory
 
 # Listen port #
@@ -14,4 +14,4 @@ elasticsearch_port_arg:
 elasticsearch_arg:
   action_destructive_requires_name: 'true'
   bootstrap_memory_lock: 'false'
-  es_heap_size: 4G
+  es_heap_size: '4'

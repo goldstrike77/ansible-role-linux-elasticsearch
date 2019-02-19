@@ -1,11 +1,21 @@
 ---
-- name: Add Elasticsearch YUM repositories
+- name: 'Add Elasticsearch {{ elasticsearch_version }} YUM repositories'
   yum_repository:
     name: '{{ elasticsearch_repo_name }}'
     description: '{{ elasticsearch_repo_name }} YUM repository'
     file: '{{ elasticsearch_repo_name }}'
-    baseurl: '{{ elasticsearch_repo_url }}'
+    baseurl: '{{ elasticsearch_packages_repo_url }}'
     gpgcheck: no
+  when: elasticsearch_version|int == 2
+
+- name: 'Add Elasticsearch {{ elasticsearch_version }} YUM repositories'
+  yum_repository:
+    name: '{{ elasticsearch_repo_name }}'
+    description: '{{ elasticsearch_repo_name }} YUM repository'
+    file: '{{ elasticsearch_repo_name }}'
+    baseurl: '{{ elasticsearch_artifacts_repo_url }}'
+    gpgcheck: no
+  when: elasticsearch_version|int >= 5
 
 - name: Install the Elasticsearch packages
   yum:

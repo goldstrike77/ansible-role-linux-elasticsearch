@@ -19,8 +19,8 @@
 # Xms represents the initial size of total heap space
 # Xmx represents the maximum size of total heap space
 {% if elasticsearch_arg.es_heap_size is defined %}
--Xms{{ elasticsearch_arg.es_heap_size }}
--Xmx{{ elasticsearch_arg.es_heap_size }}
+-Xms{{ elasticsearch_arg.es_heap_size }}g
+-Xmx{{ elasticsearch_arg.es_heap_size }}g
 {% else %}
 -Xms2g
 -Xmx2g

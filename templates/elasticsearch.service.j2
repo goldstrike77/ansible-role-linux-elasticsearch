@@ -16,11 +16,20 @@ User=elasticsearch
 Group=elasticsearch
 ExecStartPre=/usr/share/elasticsearch/bin/elasticsearch-systemd-pre-exec
 ExecStart=/usr/share/elasticsearch/bin/elasticsearch \
+{% if elasticsearch_version|int == 2 %}
+                                                -Des.pidfile=${PID_DIR}/elasticsearch.pid \
+                                                -Des.default.path.home=${ES_HOME} \
+                                                -Des.default.path.logs=${LOG_DIR} \
+                                                -Des.default.path.data=${DATA_DIR} \
+                                                -Des.default.path.conf=${CONF_DIR}
+{% elif elasticsearch_version|int == 5 %}
                                                 -p ${PID_DIR}/elasticsearch.pid \
                                                 --quiet \
                                                 -Edefault.path.logs=${LOG_DIR} \
                                                 -Edefault.path.data=${DATA_DIR} \
                                                 -Edefault.path.conf=${CONF_DIR}
+{% else %}
+{% endif %}
 StandardOutput=journal
 StandardError=inherit
 LimitNOFILE=65536
