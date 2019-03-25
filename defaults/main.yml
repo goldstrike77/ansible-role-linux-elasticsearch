@@ -3,12 +3,18 @@
 #elasticsearch_cluster_name: 'elasticsearch' # Specify name for your cluster
 elasticsearch_version: '2' # Specify the Elasticsearch version, minimum 2
 elasticsearch_path: '/data' # Specify the Elasticsearch data directory
+consul_is_register: false
+consul_exporter_token: '00000000-0000-0000-0000-000000000000'
+consul_clients:
+  - '1.1.1.1'
+  - '1.1.1.2'
+consul_http_port: '8500'
 
 # Listen port #
 elasticsearch_port_arg:
   rest: '9200' # Elasticsearch REST
   node: '9300' # Elasticsearch nodes communication
-  elasticsearch_exporter: '9108' # Prometheus Elasticsearch Exporter
+  exporter: '9108' # Prometheus Elasticsearch Exporter
 
 # Server System Variables #
 elasticsearch_arg:

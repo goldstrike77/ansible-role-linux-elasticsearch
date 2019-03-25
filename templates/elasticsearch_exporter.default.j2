@@ -1,1 +1,1 @@
-ELASTICSEARCH_EXPORTER_OPTS='-web.listen-address :{{ elasticsearch_port_arg.elasticsearch_exporter }} -{{ " -".join(vars["elasticsearch_exporter_collector"]) }}'
+ELASTICSEARCH_EXPORTER_OPTS='-web.listen-address :{{ elasticsearch_port_arg.exporter }} -{{ " -".join(vars["elasticsearch_exporter_collector"]) }}'
