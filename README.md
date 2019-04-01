@@ -113,7 +113,7 @@ You can also use the group_vars or the host_vars files for setting the variables
     elasticsearch_arg:
       action_destructive_requires_name: true
       bootstrap_memory_lock: false
-      es_heap_size: '4'
+      es_heap_size: '4g'
 
 ## License
 ![](https://img.shields.io/badge/MIT-purple.svg?style=for-the-badge)

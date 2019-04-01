@@ -22,4 +22,4 @@ elasticsearch_port_arg:
 elasticsearch_arg:
   action_destructive_requires_name: true # Restricts deletions to specific names, instead of allowing the special _all or wildcard options.
   bootstrap_memory_lock: false # Lock the process address space into RAM.
-  es_heap_size: '4' # Specify the maximum memory allocation pool for a Java virtual machine.
+  es_heap_size: '4g' # Specify the maximum memory allocation pool for a Java virtual machine.
