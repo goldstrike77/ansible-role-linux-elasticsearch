@@ -21,3 +21,6 @@
 
 - name: Include prometheus exporter tasks
   include: 'exporter.yml'
+
+- include_tasks: 'register.yml'
+  when: consul_is_register
