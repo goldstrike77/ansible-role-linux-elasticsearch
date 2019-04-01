@@ -6,6 +6,7 @@ elasticsearch_path: '/data' # Specify the Elasticsearch data directory.
 elasticsearch_selinux: 'false' # SELinux security policy.
 
 # Service Mesh #
+environments: 'SIT'
 consul_is_register: false # Whether register a client service with consul.
 consul_exporter_token: '00000000-0000-0000-0000-000000000000' # Consul client ACL token.
 consul_clients: # List of consul clients.
