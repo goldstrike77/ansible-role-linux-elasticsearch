@@ -1,8 +1,8 @@
 ---
 # General parameters #
-#elasticsearch_cluster_name: 'elasticsearch' # Specify name for your cluster
-elasticsearch_version: '5' # Specify the Elasticsearch version, minimum 2
-elasticsearch_path: '/data' # Specify the Elasticsearch data directory
+#elasticsearch_cluster_name: 'elasticsearch' # Specify name for your cluster name.
+elasticsearch_version: '5' # Specify the Elasticsearch version, minimum 2.
+elasticsearch_path: '/data' # Specify the Elasticsearch data directory.
 elasticsearch_selinux: 'false' # SELinux security policy.
 
 # Service Mesh #
@@ -14,12 +14,12 @@ consul_http_port: '8500' # The consul HTTP API port.
 
 # Listen port #
 elasticsearch_port_arg:
-  rest: '9200' # Elasticsearch REST
-  node: '9300' # Elasticsearch nodes communication
-  exporter: '9108' # Prometheus Elasticsearch Exporter
+  rest: '9200' # Elasticsearch REST.
+  node: '9300' # Elasticsearch nodes communication.
+  exporter: '9108' # Prometheus Elasticsearch Exporter.
 
 # Server System Variables #
 elasticsearch_arg:
-  action_destructive_requires_name: 'true'
-  bootstrap_memory_lock: 'false'
-  es_heap_size: '4'
+  action_destructive_requires_name: true # Restricts deletions to specific names, instead of allowing the special _all or wildcard options.
+  bootstrap_memory_lock: false # Lock the process address space into RAM.
+  es_heap_size: '4' # Specify the maximum memory allocation pool for a Java virtual machine.

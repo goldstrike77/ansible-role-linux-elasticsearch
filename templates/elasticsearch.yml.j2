@@ -40,7 +40,7 @@ path.data: {{ elasticsearch_path }}/elasticsearch
 #
 # Lock the memory on startup:
 #
-bootstrap.memory_lock: {{ elasticsearch_arg.bootstrap_memory_lock }}
+bootstrap.memory_lock: {{ elasticsearch_arg.bootstrap_memory_lock | bool | to_json }}
 #
 # Make sure that the heap size is set to about half the memory available
 # on the system and that the owner of the process is allowed to use this
@@ -88,4 +88,4 @@ discovery.zen.minimum_master_nodes: {{ (elasticsearch_servers | length / 2 + 1) 
 #
 # Require explicit names when deleting indices:
 #
-action.destructive_requires_name: {{ elasticsearch_arg.action_destructive_requires_name }}
+action.destructive_requires_name: {{ elasticsearch_arg.action_destructive_requires_name | bool | to_json }}
