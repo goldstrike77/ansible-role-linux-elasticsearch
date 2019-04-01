@@ -1,11 +1,11 @@
 ---
-disable_gpg_check: yes
 elasticsearch_repo_name: 'elasticsearch'
 elasticsearch_packages_repo_url: 'http://packages.elastic.co/elasticsearch/{{ elasticsearch_version }}.x/centos'
 elasticsearch_artifacts_repo_url: 'http://artifacts.elastic.co/packages/{{ elasticsearch_version }}.x/yum'
 elasticsearch_packages:
-  - 'java-1.8.0-openjdk'
-  - 'elasticsearch'
+  - 'elasticsearch-{{ elasticsearch_version }}*'
+  - 'java-1.8.0-openjdk-headless'
+  - 'policycoreutils-python'
 
 elasticsearch_exporter_repo_name: 'prometheus'
 elasticsearch_exporter_repo_url: "http://cache.omygods.com/prometheus-rpm/release/el/{{ansible_distribution_version.split('.')[0]}}/$basearch"

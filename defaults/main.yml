@@ -1,14 +1,16 @@
 ---
 # General parameters #
 #elasticsearch_cluster_name: 'elasticsearch' # Specify name for your cluster
-elasticsearch_version: '2' # Specify the Elasticsearch version, minimum 2
+elasticsearch_version: '5' # Specify the Elasticsearch version, minimum 2
 elasticsearch_path: '/data' # Specify the Elasticsearch data directory
-consul_is_register: false
-consul_exporter_token: '00000000-0000-0000-0000-000000000000'
-consul_clients:
-  - '1.1.1.1'
-  - '1.1.1.2'
-consul_http_port: '8500'
+elasticsearch_selinux: 'false' # SELinux security policy.
+
+# Service Mesh #
+consul_is_register: false # Whether register a client service with consul.
+consul_exporter_token: '00000000-0000-0000-0000-000000000000' # Consul client ACL token.
+consul_clients: # List of consul clients.
+  - 'localhost'
+consul_http_port: '8500' # The consul HTTP API port.
 
 # Listen port #
 elasticsearch_port_arg:
