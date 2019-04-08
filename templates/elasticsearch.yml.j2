@@ -91,4 +91,5 @@ discovery.zen.minimum_master_nodes: {{ (elasticsearch_servers | length / 2 + 1) 
 action.destructive_requires_name: {{ elasticsearch_arg.action_destructive_requires_name | bool | to_json }}
 {% if elasticsearch_xpack %}
 xpack.monitoring.enabled: false
+xpack.security.audit.enabled: true
 {% endif %}

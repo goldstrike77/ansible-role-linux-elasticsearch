@@ -1,6 +1,11 @@
 ---
 elasticsearch_plugin_url: 'http://artifacts.elastic.co/downloads/packs'
 
+elasticsearch_xpack_builtin_user:
+  - 'elastic'
+  - 'kibana'
+  - 'logstash_system'
+
 elasticsearch_folder:
   - '{{ elasticsearch_path }}/elasticsearch'
 

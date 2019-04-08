@@ -23,9 +23,11 @@
     body: '{"password": "{{ elasticsearch_pass }}"}'
     body_format: 'json'
     force_basic_auth: 'yes'
-  loop:
-    - 'elastic'
-    - 'kibana'
-    - 'logstash_system'
+  loop: '{{ elasticsearch_xpack_builtin_user|flatten(levels=1) }}'
   environment:
     no_proxy: '127.0.0.1'
+  register: es_auth_status
+  until: es_auth_status.status == 200
+  retries: 24
+  delay: 5
+  no_log: true
