@@ -39,7 +39,7 @@ This role will work on the following operating systems:
 
 The following list of supported the Elasticsearch releases:
 
-* Elasticsearch 2, 5
+* Elasticsearch 5
 
 ## Role variables
 ### Minimal configuration
@@ -55,6 +55,8 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 ##### General parameters
 * `elasticsearch_path`: Specify the Elasticsearch data directory.
 * `elasticsearch_selinux`: SELinux security policy.
+* `elasticsearch_xpack`: Whether install x-pack plugins.
+* `elasticsearch_pass`: Authorization password.
 
 ##### Service Mesh
 * `consul_is_register`: Whether register a client service with consul.
@@ -99,9 +101,11 @@ Including an example of how to use your role (for instance, with variables passe
 You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: group_vars/all or host_vars/`group_name`
 
     elasticsearch_cluster_name: 'graylog'
-    elasticsearch_version: '5'
+    elasticsearch_version: '5.6.16'
     elasticsearch_path: '/data'
     elasticsearch_selinux: 'false'
+    elasticsearch_xpack: true
+    elasticsearch_pass: 'password'
     consul_is_register: false
     consul_exporter_token: '00000000-0000-0000-0000-000000000000'
     consul_clients: 'localhost'

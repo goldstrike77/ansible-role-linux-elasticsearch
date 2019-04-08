@@ -1,0 +1,31 @@
+---
+- name: Waiting for Elasticsearch node ready
+  uri:
+    url: 'http://127.0.0.1:{{ elasticsearch_port_arg.rest }}/_cluster/health'
+    method: 'GET'
+    user: 'elastic'
+    password: 'changeme'
+    force_basic_auth: 'yes'
+    return_content: 'yes'
+  environment:
+    no_proxy: '127.0.0.1'
+  register: es_node_status
+  until: es_node_status.content.find("green") != -1
+  retries: 24
+  delay: 5
+
+- name: Change Elasticsearch user password
+  uri:
+    url: 'http://127.0.0.1:{{ elasticsearch_port_arg.rest }}/_xpack/security/user/{{ item }}/_password'
+    method: 'POST'
+    user: '{{ item }}'
+    password: 'changeme'
+    body: '{"password": "{{ elasticsearch_pass }}"}'
+    body_format: 'json'
+    force_basic_auth: 'yes'
+  loop:
+    - 'elastic'
+    - 'kibana'
+    - 'logstash_system'
+  environment:
+    no_proxy: '127.0.0.1'

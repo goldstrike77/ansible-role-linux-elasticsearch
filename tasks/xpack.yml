@@ -1,0 +1,37 @@
+---
+- name: Check if x-pack plugin exists
+  shell: '/usr/share/elasticsearch/bin/elasticsearch-plugin list | grep x-pack'
+  register: es_xpack_installed
+  changed_when: False
+  failed_when: "'ERROR' in es_xpack_installed.stdout"
+  check_mode: no
+
+- name: Remove x-pack plugin if Elasticsearch version has changed
+  shell: '/usr/share/elasticsearch/bin/elasticsearch-plugin remove x-pack'
+  register: es_xpack_state
+  failed_when: "'ERROR' in es_xpack_state.stdout"
+  changed_when: es_xpack_state.rc == 0
+  when:
+    - es_xpack_installed.rc == 0
+    - es_update|changed
+
+- name: Download x-pack plugin from elastic.co
+  get_url:
+    url: '{{ elasticsearch_plugin_url }}/x-pack/x-pack-{{ elasticsearch_version }}.zip'
+    dest: '/tmp/x-pack-{{ elasticsearch_version }}.zip'
+  when:
+    - es_xpack_installed.rc == 1 or es_update|changed
+
+- name: Install x-pack plugin from elastic.co
+  become: yes
+  shell: '/usr/share/elasticsearch/bin/elasticsearch-plugin install --silent --batch file:///tmp/x-pack-{{ elasticsearch_version }}.zip'
+  register: es_xpack_state
+  when:
+    - es_xpack_installed.rc == 1 or es_update|changed
+
+- name: Remove x-pack plugin local file
+  file:
+    state: 'absent'
+    path: '/tmp/x-pack/x-pack-{{ elasticsearch_version }}.zip'
+  when:
+    - es_xpack_installed.rc == 1 or es_update|changed

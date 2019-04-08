@@ -14,10 +14,23 @@
 - name: Configuration the consul
   include: 'configureation.yml'
 
+- name: Install x-pack plugins
+  include: 'xpack.yml'
+  when: elasticsearch_xpack
+
 - name: Reload the Elasticsearch service
   shell: echo ''
   notify: 'Ensure Elasticsearch service is enabled'
-  when: es_update|changed or es_config|changed
+  when: es_update|changed or es_config|changed or es_xpack_state|changed
+
+- name: Force the handler to run immediately
+  meta: flush_handlers
+
+- name: Include authentication tasks
+  include: 'authentication.yml'
+  when:
+    - elasticsearch_xpack 
+    - es_xpack_state|changed or es_xpack_state|changed
 
 - name: Include prometheus exporter tasks
   include: 'exporter.yml'

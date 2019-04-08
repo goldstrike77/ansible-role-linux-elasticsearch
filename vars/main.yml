@@ -1,4 +1,6 @@
 ---
+elasticsearch_plugin_url: 'http://artifacts.elastic.co/downloads/packs'
+
 elasticsearch_folder:
   - '{{ elasticsearch_path }}/elasticsearch'
 

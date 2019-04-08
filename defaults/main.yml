@@ -1,9 +1,11 @@
 ---
 # General parameters #
 #elasticsearch_cluster_name: 'elasticsearch' # Specify name for your cluster name.
-elasticsearch_version: '5' # Specify the Elasticsearch version, minimum 2.
+elasticsearch_version: '5.6.16' # Specify the Elasticsearch version, minimum 2.
 elasticsearch_path: '/data' # Specify the Elasticsearch data directory.
 elasticsearch_selinux: 'false' # SELinux security policy.
+elasticsearch_xpack: true # Whether install x-pack plugins.
+elasticsearch_pass: 'password' # Authorization user password.
 
 # Service Mesh #
 environments: 'SIT'
