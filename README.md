@@ -73,6 +73,8 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `elasticsearch_arg.action_destructive_requires_name`: Restricts deletions to specific names, instead of allowing the special _all or wildcard options.
 * `elasticsearch_arg.bootstrap_memory_lock`: Lock the process address space into RAM.
 * `elasticsearch_arg.es_heap_size`: Specify the maximum memory allocation pool for a Java virtual machine.
+* `elasticsearch_arg.xpack_monitoring_enabled`: Enable X-Pack monitoring on the node.
+* `elasticsearch_arg.xpack_security_audit_enabled`: Enable X-Pack auditing on the node.
 
 ### Other parameters
 There are some variables in vars/main.yml:
@@ -118,6 +120,8 @@ You can also use the group_vars or the host_vars files for setting the variables
       action_destructive_requires_name: true
       bootstrap_memory_lock: false
       es_heap_size: '4g'
+      xpack_monitoring_enabled: false
+      xpack_security_audit_enabled: false
 
 ## License
 ![](https://img.shields.io/badge/MIT-purple.svg?style=for-the-badge)
