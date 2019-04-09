@@ -59,6 +59,7 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `elasticsearch_pass`: Authorization password.
 
 ##### Service Mesh
+* `environments`: Define the service environment.
 * `consul_is_register`: Whether register a client service with consul.
 * `consul_exporter_token`: Consul client ACL token.
 * `consul_clients`: List of consul clients.
@@ -110,6 +111,7 @@ You can also use the group_vars or the host_vars files for setting the variables
     elasticsearch_selinux: 'false'
     elasticsearch_xpack: true
     elasticsearch_pass: 'password'
+    environments: 'SIT'
     consul_is_register: false
     consul_exporter_token: '00000000-0000-0000-0000-000000000000'
     consul_clients: 'localhost'
