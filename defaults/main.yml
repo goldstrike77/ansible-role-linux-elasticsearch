@@ -26,5 +26,7 @@ elasticsearch_arg:
   action_destructive_requires_name: true # Restricts deletions to specific names, instead of allowing the special _all or wildcard options.
   bootstrap_memory_lock: false # Lock the process address space into RAM.
   es_heap_size: '3g' # Specify the maximum memory allocation pool for a Java virtual machine.
+  xpack_graph_enabled: false # Enable X-Pack graph on the node.
   xpack_monitoring_enabled: false # Enable X-Pack monitoring on the node.
   xpack_security_audit_enabled: false # Enable X-Pack auditing on the node.
+  xpack_watcher_enabled: false # Enable X-Pack watcher on the node.

@@ -92,4 +92,6 @@ action.destructive_requires_name: {{ elasticsearch_arg.action_destructive_requir
 {% if elasticsearch_xpack %}
 xpack.monitoring.enabled: {{ elasticsearch_arg.xpack_monitoring_enabled | bool | to_json }} 
 xpack.security.audit.enabled: {{ elasticsearch_arg.xpack_security_audit_enabled | bool | to_json }}
+xpack.graph.enabled: {{ elasticsearch_arg.xpack_graph_enabled | bool | to_json }}
+xpack.watcher.enabled: {{ elasticsearch_arg.xpack_watcher_enabled | bool | to_json }}
 {% endif %}
