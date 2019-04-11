@@ -1,6 +1,6 @@
 ---
 elasticsearch_repo_name: 'elasticsearch'
-elasticsearch_artifacts_repo_url: "http://artifacts.elastic.co/packages/{{ elasticsearch_version.split('.')[1] }}.x/yum"
+elasticsearch_artifacts_repo_url: "http://artifacts.elastic.co/packages/{{ elasticsearch_version.split('.')[0] }}.x/yum"
 elasticsearch_packages:
   - 'elasticsearch-{{ elasticsearch_version }}*'
   - 'java-1.8.0-openjdk-headless'
