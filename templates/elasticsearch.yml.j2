@@ -14,7 +14,7 @@
 #
 # Use a descriptive name for your cluster:
 #
-cluster.name: {{ elasticsearch_cluster_name | lower }}
+cluster.name: {{ elastic_cluster_name | lower }}
 #
 # ------------------------------------ Node ------------------------------------
 #
@@ -30,7 +30,7 @@ node.name: {{ ansible_hostname }}
 #
 # Path to directory where to store the data (separate multiple locations by comma):
 #
-path.data: {{ elasticsearch_path }}/elasticsearch
+path.data: {{ elastic_path }}/elasticsearch
 #
 # Path to log files:
 #
@@ -40,7 +40,7 @@ path.data: {{ elasticsearch_path }}/elasticsearch
 #
 # Lock the memory on startup:
 #
-bootstrap.memory_lock: {{ elasticsearch_arg.bootstrap_memory_lock | bool | to_json }}
+bootstrap.memory_lock: {{ elastic_arg.bootstrap_memory_lock | bool | to_json }}
 #
 # Make sure that the heap size is set to about half the memory available
 # on the system and that the owner of the process is allowed to use this
@@ -56,7 +56,7 @@ network.host: 0.0.0.0
 #
 # Set a custom port for HTTP:
 #
-http.port: {{ elasticsearch_port_arg.rest }}
+http.port: {{ elastic_port_arg.rest }}
 #
 # For more information, consult the network module documentation.
 #
@@ -68,11 +68,11 @@ http.port: {{ elasticsearch_port_arg.rest }}
 #discovery.zen.ping.unicast.hosts: ["host1", "host2"]
 #
 discovery.zen.fd.ping_timeout: 30s
-discovery.zen.ping.unicast.hosts: ['{{ elasticsearch_servers | list | join(":" + elasticsearch_port_arg.node + "', '") }}:{{ elasticsearch_port_arg.node }}']
+discovery.zen.ping.unicast.hosts: ['{{ elastic_servers | list | join(":" + elastic_port_arg.node + "', '") }}:{{ elastic_port_arg.node }}']
 #
 # Prevent the "split brain" by configuring the majority of nodes (total number of master-eligible nodes / 2 + 1):
 #
-discovery.zen.minimum_master_nodes: {{ (elasticsearch_servers | length / 2 + 1) | int }}
+discovery.zen.minimum_master_nodes: {{ (elastic_servers | length / 2 + 1) | int }}
 #
 # For more information, consult the zen discovery module documentation.
 #
@@ -88,10 +88,10 @@ discovery.zen.minimum_master_nodes: {{ (elasticsearch_servers | length / 2 + 1) 
 #
 # Require explicit names when deleting indices:
 #
-action.destructive_requires_name: {{ elasticsearch_arg.action_destructive_requires_name | bool | to_json }}
-{% if elasticsearch_xpack %}
-xpack.monitoring.enabled: {{ elasticsearch_arg.xpack_monitoring_enabled | bool | to_json }} 
-xpack.security.audit.enabled: {{ elasticsearch_arg.xpack_security_audit_enabled | bool | to_json }}
-xpack.graph.enabled: {{ elasticsearch_arg.xpack_graph_enabled | bool | to_json }}
-xpack.watcher.enabled: {{ elasticsearch_arg.xpack_watcher_enabled | bool | to_json }}
+action.destructive_requires_name: {{ elastic_arg.action_destructive_requires_name | bool | to_json }}
+{% if elastic_xpack %}
+xpack.monitoring.enabled: {{ elastic_arg.xpack_monitoring_enabled | bool | to_json }} 
+xpack.security.audit.enabled: {{ elastic_arg.xpack_security_audit_enabled | bool | to_json }}
+xpack.graph.enabled: {{ elastic_arg.xpack_graph_enabled | bool | to_json }}
+xpack.watcher.enabled: {{ elastic_arg.xpack_watcher_enabled | bool | to_json }}
 {% endif %}

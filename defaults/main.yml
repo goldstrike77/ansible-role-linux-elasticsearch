@@ -1,11 +1,11 @@
 ---
 # General parameters #
-#elasticsearch_cluster_name: 'elasticsearch' # Specify name for your cluster name.
-elasticsearch_version: '5.6.16' # Specify the Elasticsearch version, minimum 2.
-elasticsearch_path: '/data' # Specify the Elasticsearch data directory.
-elasticsearch_selinux: 'false' # SELinux security policy.
-elasticsearch_xpack: true # Whether install x-pack plugins.
-elasticsearch_pass: 'password' # Authorization user password.
+#elastic_cluster_name: 'elasticsearch' # Specify name for your cluster name.
+elastic_version: '5.6.16' # Specify the Elasticsearch version, minimum 2.
+elastic_path: '/data' # Specify the Elasticsearch data directory.
+elastic_selinux: 'false' # SELinux security policy.
+elastic_xpack: true # Whether install x-pack plugins.
+elastic_pass: 'password' # Authorization user password.
 
 # Service Mesh #
 environments: 'SIT'
@@ -16,13 +16,13 @@ consul_clients: # List of consul clients.
 consul_http_port: '8500' # The consul HTTP API port.
 
 # Listen port #
-elasticsearch_port_arg:
+elastic_port_arg:
   rest: '9200' # Elasticsearch REST.
   node: '9300' # Elasticsearch nodes communication.
   exporter: '9108' # Prometheus Elasticsearch Exporter.
 
 # Server System Variables #
-elasticsearch_arg:
+elastic_arg:
   action_destructive_requires_name: true # Restricts deletions to specific names, instead of allowing the special _all or wildcard options.
   bootstrap_memory_lock: false # Lock the process address space into RAM.
   es_heap_size: '3g' # Specify the maximum memory allocation pool for a Java virtual machine.

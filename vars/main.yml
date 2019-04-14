@@ -1,34 +1,34 @@
 ---
-elasticsearch_plugin_url: 'http://artifacts.elastic.co/downloads/packs'
+elastic_plugin_url: 'http://artifacts.elastic.co/downloads/packs'
 
-elasticsearch_xpack_builtin_user:
+elastic_xpack_builtin_user:
   - 'elastic'
   - 'kibana'
   - 'logstash_system'
 
-elasticsearch_folder:
-  - '{{ elasticsearch_path }}/elasticsearch'
+elastic_folder:
+  - '{{ elastic_path }}/elasticsearch'
 
-elasticsearch_conf_scripts:
+elastic_conf_scripts:
   - { src: 'elasticsearch.service.j2',   dest: '/lib/systemd/system/elasticsearch.service' }
   - { src: 'elasticsearch.yml.j2',       dest: '/etc/elasticsearch/elasticsearch.yml' }
   - { src: 'elasticsearch.sysconfig.j2', dest: '/etc/sysconfig/elasticsearch' }
   - { src: 'jvm.options.j2',             dest: '/etc/elasticsearch/jvm.options' }
 
-elasticsearch_kernel_parameters:
+elastic_kernel_parameters:
   - { variable: 'vm.max_map_count', value: '262144' }
   - { variable: 'vm.swappiness', value: '10' }
 
-elasticsearch_servers: "\
-  {% set _elasticsearch_servers = [] %}\
+elastic_servers: "\
+  {% set _elastic_servers = [] %}\
   {% for host in groups[group_names[-1]] %}\
-    {% set _elasticsearch_cluster_name = hostvars[host]['elasticsearch_cluster_name'] | default('', true) %}\
-    {% if ( _elasticsearch_cluster_name == hostvars[host]['elasticsearch_cluster_name']) %}\
-      {% if _elasticsearch_servers.append(hostvars[host]['ansible_host']) %}{% endif %}\
+    {% set _elastic_cluster_name = hostvars[host]['elastic_cluster_name'] | default('', true) %}\
+    {% if ( _elastic_cluster_name == hostvars[host]['elastic_cluster_name']) %}\
+      {% if _elastic_servers.append(hostvars[host]['ansible_host']) %}{% endif %}\
     {% endif %}\
   {% endfor %}\
-  {{ _elasticsearch_servers }}"
+  {{ _elastic_servers }}"
 
-elasticsearch_exporter_collector:
+elastic_exporter_collector:
 #  - 'es.all'
   - 'es.indices'

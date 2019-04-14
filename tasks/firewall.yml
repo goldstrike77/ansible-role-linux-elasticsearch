@@ -6,4 +6,4 @@
     permanent: 'true'
     immediate: 'true'
     state: 'enabled'
-  with_dict: '{{ elasticsearch_port_arg }}'
+  with_dict: '{{ elastic_port_arg }}'

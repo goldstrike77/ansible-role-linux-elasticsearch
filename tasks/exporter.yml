@@ -1,10 +1,10 @@
 ---
 - name: Add Prometheus elasticsearch exporter YUM repositories
   yum_repository:
-    name: '{{ elasticsearch_exporter_repo_name }}'
-    description: '{{ elasticsearch_exporter_repo_name }} YUM repository'
-    file: '{{ elasticsearch_exporter_repo_name }}'
-    baseurl: '{{ elasticsearch_exporter_repo_url }}'
+    name: '{{ elastic_exporter_repo_name }}'
+    description: '{{ elastic_exporter_repo_name }} YUM repository'
+    file: '{{ elastic_exporter_repo_name }}'
+    baseurl: '{{ elastic_exporter_repo_url }}'
     gpgcheck: no
 
 - name: Install the Prometheus elasticsearch exporter packages
@@ -12,7 +12,7 @@
     name: '{{ item }}'
     state: 'present'
   with_items:
-    - '{{ elasticsearch_exporter_packages }}'
+    - '{{ elastic_exporter_packages }}'
 
 - name: Prometheus elasticsearch exporter configure file transfer
   template:

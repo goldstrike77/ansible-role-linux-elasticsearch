@@ -12,9 +12,9 @@
   changed_when: false
   become: yes
 
-- name: 'Set elasticsearch_selinux to true if getenforce returns Enforcing or Permissive'
+- name: 'Set elastic_selinux to true if getenforce returns Enforcing or Permissive'
   set_fact:
-    elasticsearch_selinux: '{{ true }}'
+    elastic_selinux: '{{ true }}'
   when: 'getenforce_bin.stat.exists and ("Enforcing" in sestatus.stdout or "Permissive" in sestatus.stdout)'
 
 - name: 'Allow elasticsearch to listen on tcp port'
@@ -23,6 +23,6 @@
     proto: 'tcp'
     setype: 'http_port_t'
     state: 'present'
-  loop: '{{ elasticsearch_port_arg|dict2items }}'
+  loop: '{{ elastic_port_arg|dict2items }}'
   when:
-    - elasticsearch_selinux
+    - elastic_selinux

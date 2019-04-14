@@ -46,17 +46,17 @@ The following list of supported the Elasticsearch releases:
 
 In order to get the Elasticsearch running, you'll have to define the following properties before executing the role:
 
-* `elasticsearch_cluster_name`: Specify name for your cluster name.
-* `elasticsearch_version`: Specify the Elasticsearch version.
+* `elastic_cluster_name`: Specify name for your cluster name.
+* `elastic_version`: Specify the Elasticsearch version.
 
 ### Main parameters #
 There are some variables in defaults/main.yml which can (Or needs to) be overridden:
 
 ##### General parameters
-* `elasticsearch_path`: Specify the Elasticsearch data directory.
-* `elasticsearch_selinux`: SELinux security policy.
-* `elasticsearch_xpack`: Whether install x-pack plugins.
-* `elasticsearch_pass`: Authorization password.
+* `elastic_path`: Specify the Elasticsearch data directory.
+* `elastic_selinux`: SELinux security policy.
+* `elastic_xpack`: Whether install x-pack plugins.
+* `elastic_pass`: Authorization password.
 
 ##### Service Mesh
 * `environments`: Define the service environment.
@@ -66,18 +66,18 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `consul_http_port`: The consul HTTP API port.
 
 ##### Listen port
-* `elasticsearch_port_arg.rest`: Elasticsearch REST port.
-* `elasticsearch_port_arg.node`: Elasticsearch nodes communication port.
-* `elasticsearch_port_arg.exporter`: Prometheus Elasticsearch Exporter port.
+* `elastic_port_arg.rest`: Elasticsearch REST port.
+* `elastic_port_arg.node`: Elasticsearch nodes communication port.
+* `elastic_port_arg.exporter`: Prometheus Elasticsearch Exporter port.
 
 ##### Server System Variables
-* `elasticsearch_arg.action_destructive_requires_name`: Restricts deletions to specific names, instead of allowing the special _all or wildcard options.
-* `elasticsearch_arg.bootstrap_memory_lock`: Lock the process address space into RAM.
-* `elasticsearch_arg.es_heap_size`: Specify the maximum memory allocation pool for a Java virtual machine.
-* `elasticsearch_arg.xpack_graph_enabled`: Enable X-Pack graph on the node.
-* `elasticsearch_arg.xpack_monitoring_enabled`: Enable X-Pack monitoring on the node.
-* `elasticsearch_arg.xpack_security_audit_enabled`: Enable X-Pack auditing on the node.
-* `elasticsearch_arg.xpack_watcher_enabled`: Enable X-Pack watcher on the node.
+* `elastic_arg.action_destructive_requires_name`: Restricts deletions to specific names, instead of allowing the special _all or wildcard options.
+* `elastic_arg.bootstrap_memory_lock`: Lock the process address space into RAM.
+* `elastic_arg.es_heap_size`: Specify the maximum memory allocation pool for a Java virtual machine.
+* `elastic_arg.xpack_graph_enabled`: Enable X-Pack graph on the node.
+* `elastic_arg.xpack_monitoring_enabled`: Enable X-Pack monitoring on the node.
+* `elastic_arg.xpack_security_audit_enabled`: Enable X-Pack auditing on the node.
+* `elastic_arg.xpack_watcher_enabled`: Enable X-Pack watcher on the node.
 
 ### Other parameters
 There are some variables in vars/main.yml:
@@ -90,9 +90,9 @@ There are no dependencies on other roles.
 ### Hosts inventory file
 See tests/inventory for an example.
 
-    node01 ansible_host='192.168.1.10' elasticsearch_cluster_name='graylog'
-    node02 ansible_host='192.168.1.11' elasticsearch_cluster_name='graylog'
-    node03 ansible_host='192.168.1.12' elasticsearch_cluster_name='graylog'
+    node01 ansible_host='192.168.1.10' elastic_cluster_name='graylog'
+    node02 ansible_host='192.168.1.11' elastic_cluster_name='graylog'
+    node03 ansible_host='192.168.1.12' elastic_cluster_name='graylog'
 
 ### Vars in role configuration
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
@@ -100,27 +100,27 @@ Including an example of how to use your role (for instance, with variables passe
     - hosts: all
       roles:
          - role: ansible-role-linux-elasticsearch
-           elasticsearch_cluster_name: 'graylog'
+           elastic_cluster_name: 'graylog'
 
 ### Combination of group vars and playbook
 You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: group_vars/all or host_vars/`group_name`
 
-    elasticsearch_cluster_name: 'graylog'
-    elasticsearch_version: '5.6.16'
-    elasticsearch_path: '/data'
-    elasticsearch_selinux: 'false'
-    elasticsearch_xpack: true
-    elasticsearch_pass: 'password'
+    elastic_cluster_name: 'graylog'
+    elastic_version: '5.6.16'
+    elastic_path: '/data'
+    elastic_selinux: 'false'
+    elastic_xpack: true
+    elastic_pass: 'password'
     environments: 'SIT'
     consul_is_register: false
     consul_exporter_token: '00000000-0000-0000-0000-000000000000'
     consul_clients: 'localhost'
     consul_http_port: '8500'
-    elasticsearch_port_arg:
+    elastic_port_arg:
       rest: '9200'
       node: '9300'
       exporter: '9108'
-    elasticsearch_arg:
+    elastic_arg:
       action_destructive_requires_name: true
       bootstrap_memory_lock: false
       es_heap_size: '4g'

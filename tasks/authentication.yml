@@ -1,7 +1,7 @@
 ---
 - name: Waiting for Elasticsearch node ready
   uri:
-    url: 'http://127.0.0.1:{{ elasticsearch_port_arg.rest }}/_cluster/health'
+    url: 'http://127.0.0.1:{{ elastic_port_arg.rest }}/_cluster/health'
     method: 'GET'
     user: 'elastic'
     password: 'changeme'
@@ -16,14 +16,14 @@
 
 - name: Change Elasticsearch user password
   uri:
-    url: 'http://127.0.0.1:{{ elasticsearch_port_arg.rest }}/_xpack/security/user/{{ item }}/_password'
+    url: 'http://127.0.0.1:{{ elastic_port_arg.rest }}/_xpack/security/user/{{ item }}/_password'
     method: 'POST'
     user: '{{ item }}'
     password: 'changeme'
-    body: '{"password": "{{ elasticsearch_pass }}"}'
+    body: '{"password": "{{ elastic_pass }}"}'
     body_format: 'json'
     force_basic_auth: 'yes'
-  loop: '{{ elasticsearch_xpack_builtin_user|flatten(levels=1) }}'
+  loop: '{{ elastic_xpack_builtin_user|flatten(levels=1) }}'
   environment:
     no_proxy: '127.0.0.1'
   register: es_auth_status

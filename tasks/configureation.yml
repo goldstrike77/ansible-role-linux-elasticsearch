@@ -7,7 +7,7 @@
     group: elasticsearch
     mode: 0755
   with_items:
-    - '{{ elasticsearch_folder }}'
+    - '{{ elastic_folder }}'
 
 - name: Configure kernel parameters
   sysctl:
@@ -18,7 +18,7 @@
     sysctl_set: yes
     sysctl_file: /etc/sysctl.d/20-sysctl.conf
   with_items:
-    - '{{ elasticsearch_kernel_parameters }}'
+    - '{{ elastic_kernel_parameters }}'
 
 - name: Elasticsearch Configure & Scripts file transfer
   template:
@@ -28,5 +28,5 @@
     group: root
     mode: 0644
   with_items:
-    - '{{ elasticsearch_conf_scripts }}'
+    - '{{ elastic_conf_scripts }}'
   register: es_config

@@ -1,12 +1,12 @@
 ---
-elasticsearch_repo_name: 'elasticsearch'
-elasticsearch_artifacts_repo_url: "http://artifacts.elastic.co/packages/{{ elasticsearch_version.split('.')[0] }}.x/yum"
-elasticsearch_packages:
+elastic_repo_name: 'elasticsearch'
+elastic_artifacts_repo_url: "http://artifacts.elastic.co/packages/{{ elasticsearch_version.split('.')[0] }}.x/yum"
+elastic_packages:
   - 'elasticsearch-{{ elasticsearch_version }}*'
   - 'java-1.8.0-openjdk-headless'
   - 'policycoreutils-python'
 
-elasticsearch_exporter_repo_name: 'prometheus'
-elasticsearch_exporter_repo_url: "http://cache.omygods.com/prometheus-rpm/release/el/{{ansible_distribution_version.split('.')[0]}}/$basearch"
-elasticsearch_exporter_packages:
+elastic_exporter_repo_name: 'prometheus'
+elastic_exporter_repo_url: "http://cache.omygods.com/prometheus-rpm/release/el/{{ansible_distribution_version.split('.')[0]}}/$basearch"
+elastic_exporter_packages:
   - 'elasticsearch_exporter'

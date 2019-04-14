@@ -12,19 +12,13 @@
 #CONF_DIR=/etc/elasticsearch
 
 # Elasticsearch data directory
-DATA_DIR={{ elasticsearch_path }}/elasticsearch
+DATA_DIR={{ elastic_path }}/elasticsearch
 
 # Elasticsearch logs directory
 #LOG_DIR=/var/log/elasticsearch
 
 # Elasticsearch PID directory
 #PID_DIR=/var/run/elasticsearch
-
-{% if elasticsearch_version|int == 2 %}
-# Heap size defaults to 256m min, 1g max
-# Set ES_HEAP_SIZE to 50% of available RAM, but no more than 31g
-ES_HEAP_SIZE={{ elasticsearch_arg.es_heap_size }}
-{% endif %}
 
 # Additional Java OPTS
 #ES_JAVA_OPTS=

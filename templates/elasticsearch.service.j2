@@ -7,7 +7,7 @@ After=network-online.target
 [Service]
 Environment=ES_HOME=/usr/share/elasticsearch
 Environment=CONF_DIR=/etc/elasticsearch
-Environment=DATA_DIR={{ elasticsearch_path }}/elasticsearch
+Environment=DATA_DIR={{ elastic_path }}/elasticsearch
 Environment=LOG_DIR=/var/log/elasticsearch
 Environment=PID_DIR=/var/run/elasticsearch
 EnvironmentFile=-/etc/sysconfig/elasticsearch

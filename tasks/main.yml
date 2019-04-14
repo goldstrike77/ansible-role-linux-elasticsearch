@@ -16,7 +16,7 @@
 
 - name: Install x-pack plugins
   include: 'xpack.yml'
-  when: elasticsearch_xpack
+  when: elastic_xpack
 
 - name: Reload the Elasticsearch service
   shell: echo ''
@@ -29,7 +29,7 @@
 - name: Include authentication tasks
   include: 'authentication.yml'
   when:
-    - elasticsearch_xpack 
+    - elastic_xpack 
     - es_xpack_state|changed or es_xpack_state|changed
 
 - name: Include prometheus exporter tasks
