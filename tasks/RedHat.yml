@@ -1,5 +1,5 @@
 ---
-- name: 'Add Elasticsearch {{ elasticsearch_version }} YUM repositories'
+- name: 'Add Elasticsearch {{ elastic_version }} YUM repositories'
   yum_repository:
     name: '{{ elastic_repo_name }}'
     description: '{{ elastic_repo_name }} YUM repository'
