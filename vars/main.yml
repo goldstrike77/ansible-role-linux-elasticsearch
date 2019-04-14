@@ -22,8 +22,8 @@ elastic_kernel_parameters:
 elastic_servers: "\
   {% set _elastic_servers = [] %}\
   {% for host in groups[group_names[-1]] %}\
-    {% set _elastic_cluster_name = hostvars[host]['elastic_cluster_name'] | default('', true) %}\
-    {% if ( _elastic_cluster_name == hostvars[host]['elastic_cluster_name']) %}\
+    {% set _elastic_cluster = hostvars[host]['elastic_cluster'] | default('', true) %}\
+    {% if ( _elastic_cluster == hostvars[host]['elastic_cluster']) %}\
       {% if _elastic_servers.append(hostvars[host]['ansible_host']) %}{% endif %}\
     {% endif %}\
   {% endfor %}\

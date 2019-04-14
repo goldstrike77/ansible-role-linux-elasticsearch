@@ -46,7 +46,7 @@ The following list of supported the Elasticsearch releases:
 
 In order to get the Elasticsearch running, you'll have to define the following properties before executing the role:
 
-* `elastic_cluster_name`: Specify name for your cluster name.
+* `elastic_cluster`: Specify name for your cluster name.
 * `elastic_version`: Specify the Elasticsearch version.
 
 ### Main parameters #
@@ -90,9 +90,9 @@ There are no dependencies on other roles.
 ### Hosts inventory file
 See tests/inventory for an example.
 
-    node01 ansible_host='192.168.1.10' elastic_cluster_name='graylog'
-    node02 ansible_host='192.168.1.11' elastic_cluster_name='graylog'
-    node03 ansible_host='192.168.1.12' elastic_cluster_name='graylog'
+    node01 ansible_host='192.168.1.10' elastic_cluster='graylog'
+    node02 ansible_host='192.168.1.11' elastic_cluster='graylog'
+    node03 ansible_host='192.168.1.12' elastic_cluster='graylog'
 
 ### Vars in role configuration
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
@@ -100,12 +100,12 @@ Including an example of how to use your role (for instance, with variables passe
     - hosts: all
       roles:
          - role: ansible-role-linux-elasticsearch
-           elastic_cluster_name: 'graylog'
+           elastic_cluster: 'graylog'
 
 ### Combination of group vars and playbook
 You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: group_vars/all or host_vars/`group_name`
 
-    elastic_cluster_name: 'graylog'
+    elastic_cluster: 'graylog'
     elastic_version: '5.6.16'
     elastic_path: '/data'
     elastic_selinux: 'false'

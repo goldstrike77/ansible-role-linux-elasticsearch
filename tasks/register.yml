@@ -5,7 +5,7 @@
     method: 'PUT'
     headers:
       X-Consul-Token: "{{ consul_exporter_token }}"
-    body: '{"ID":"{{ inventory_hostname | upper }}_elastic_exporter","name":"elastic_exporter","address":"{{ ansible_default_ipv4.address }}","port":{{ elastic_port_arg.exporter }},"meta":{"instance":"{{ inventory_hostname | upper }}","group":"{{ group_names[0] | upper }}","environment":"{{ environments | upper }}","tenant":"{{ elastic_cluster_name | lower }}"},"checks":[{"http":"http://{{ ansible_default_ipv4.address }}:{{ elastic_port_arg.exporter }}/metrics","interval":"60s","tls_skip_verify":true,"method":"HEAD","timeout":"5s"}]}'
+    body: '{"ID":"{{ inventory_hostname | upper }}_elastic_exporter","name":"elastic_exporter","address":"{{ ansible_default_ipv4.address }}","port":{{ elastic_port_arg.exporter }},"meta":{"instance":"{{ inventory_hostname | upper }}","group":"{{ group_names[0] | upper }}","environment":"{{ environments | upper }}","tenant":"{{ elastic_cluster | lower }}"},"checks":[{"http":"http://{{ ansible_default_ipv4.address }}:{{ elastic_port_arg.exporter }}/metrics","interval":"60s","tls_skip_verify":true,"method":"HEAD","timeout":"5s"}]}'
     body_format: 'json'
   environment:
     no_proxy: '{{ item }}'
