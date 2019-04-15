@@ -108,8 +108,8 @@ You can also use the group_vars or the host_vars files for setting the variables
     elastic_cluster: 'graylog'
     elastic_version: '5.6.16'
     elastic_path: '/data'
-    elastic_selinux: 'false'
-    elastic_xpack: true
+    elastic_selinux: false
+    elastic_xpack: false
     elastic_pass: 'password'
     environments: 'SIT'
     consul_is_register: false

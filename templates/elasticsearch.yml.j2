@@ -14,13 +14,13 @@
 #
 # Use a descriptive name for your cluster:
 #
-cluster.name: {{ elastic_cluster | lower }}
+cluster.name: {{ elastic_cluster | upper }}
 #
 # ------------------------------------ Node ------------------------------------
 #
 # Use a descriptive name for the node:
 #
-node.name: {{ ansible_hostname }}
+node.name: {{ ansible_hostname | upper }}
 #
 # Add custom attributes to the node:
 #

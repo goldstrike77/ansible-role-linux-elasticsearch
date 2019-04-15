@@ -3,16 +3,15 @@
 #elastic_cluster: 'elasticsearch' # Specify name for your cluster name.
 elastic_version: '5.6.16' # Specify the Elasticsearch version, minimum 2.
 elastic_path: '/data' # Specify the Elasticsearch data directory.
-elastic_selinux: 'false' # SELinux security policy.
-elastic_xpack: true # Whether install x-pack plugins.
+elastic_selinux: false # SELinux security policy.
+elastic_xpack: false # Whether install x-pack plugins.
 elastic_pass: 'password' # Authorization user password.
 
 # Service Mesh #
 environments: 'SIT'
 consul_is_register: false # Whether register a client service with consul.
 consul_exporter_token: '00000000-0000-0000-0000-000000000000' # Consul client ACL token.
-consul_clients: # List of consul clients.
-  - 'localhost'
+consul_clients: 'localhost' # List of consul clients.
 consul_http_port: '8500' # The consul HTTP API port.
 
 # Listen port #
