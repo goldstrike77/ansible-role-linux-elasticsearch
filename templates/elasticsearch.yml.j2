@@ -89,6 +89,9 @@ discovery.zen.minimum_master_nodes: {{ (elastic_servers | length / 2 + 1) | int 
 # Require explicit names when deleting indices:
 #
 action.destructive_requires_name: {{ elastic_arg.action_destructive_requires_name | bool | to_json }}
+http.compression: {{ elastic_arg.http_compression | bool | to_json }}
+http.cors.enabled: {{ elastic_arg.http_cors_enabled | bool | to_json }}
+http.cors.allow-methods: {{ elastic_arg.http_cors_allow_methods }}
 {% if elastic_xpack %}
 xpack.monitoring.enabled: {{ elastic_arg.xpack_monitoring_enabled | bool | to_json }} 
 xpack.security.audit.enabled: {{ elastic_arg.xpack_security_audit_enabled | bool | to_json }}

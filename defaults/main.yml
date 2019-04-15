@@ -25,6 +25,9 @@ elastic_arg:
   action_destructive_requires_name: true # Restricts deletions to specific names, instead of allowing the special _all or wildcard options.
   bootstrap_memory_lock: false # Lock the process address space into RAM.
   es_heap_size: '3g' # Specify the maximum memory allocation pool for a Java virtual machine.
+  http_compression: true # Compression when possible with Accept-Encoding.
+  http_cors_enabled: true # Enable or disable cross-origin resource sharing.
+  http_cors_allow_methods: 'HEAD, GET, POST, PUT, DELETE' # Which methods to allow.
   xpack_graph_enabled: false # Enable X-Pack graph on the node.
   xpack_monitoring_enabled: false # Enable X-Pack monitoring on the node.
   xpack_security_audit_enabled: false # Enable X-Pack auditing on the node.
