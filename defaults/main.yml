@@ -8,7 +8,7 @@ elastic_xpack: false # Whether install x-pack plugins.
 elastic_pass: 'password' # Authorization user password.
 
 # Service Mesh #
-environments: 'SIT'
+environments: 'SIT' # Define the service environment.
 consul_is_register: false # Whether register a client service with consul.
 consul_exporter_token: '00000000-0000-0000-0000-000000000000' # Consul client ACL token.
 consul_clients: 'localhost' # List of consul clients.
