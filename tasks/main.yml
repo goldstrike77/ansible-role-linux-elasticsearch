@@ -1,4 +1,17 @@
 ---
+- name: Gather Elastic node variables for cluster
+  set_fact:
+    elastic_servers: "\
+      {% set _elastic_servers = [] %}\
+      {% for host in groups[group_names[-1]] %}\
+        {% set _elastic_cluster = hostvars[host]['elastic_cluster'] | default('', true) %}\
+        {% if ( _elastic_cluster == hostvars[host]['elastic_cluster']) %}\
+          {% if _elastic_servers.append(hostvars[host]['ansible_host']) %}{% endif %}\
+        {% endif %}\
+      {% endfor %}\
+      {{ _elastic_servers }}"
+  when: elastic_servers is not defined
+
 - name: Include OS-specific variables
   include_vars: '{{ ansible_os_family }}.yml'
 

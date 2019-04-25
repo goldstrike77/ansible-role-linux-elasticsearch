@@ -19,16 +19,6 @@ elastic_kernel_parameters:
   - { variable: 'vm.max_map_count', value: '262144' }
   - { variable: 'vm.swappiness', value: '10' }
 
-elastic_servers: "\
-  {% set _elastic_servers = [] %}\
-  {% for host in groups[group_names[-1]] %}\
-    {% set _elastic_cluster = hostvars[host]['elastic_cluster'] | default('', true) %}\
-    {% if ( _elastic_cluster == hostvars[host]['elastic_cluster']) %}\
-      {% if _elastic_servers.append(hostvars[host]['ansible_host']) %}{% endif %}\
-    {% endif %}\
-  {% endfor %}\
-  {{ _elastic_servers }}"
-
 elastic_exporter_collector:
 #  - 'es.all'
   - 'es.indices'
