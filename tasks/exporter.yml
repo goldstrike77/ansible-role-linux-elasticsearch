@@ -30,4 +30,4 @@
     state: 'restarted'
     daemon_reload: yes
   when:
-    - conf_update|changed
+    - conf_update is changed

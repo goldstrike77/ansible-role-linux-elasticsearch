@@ -13,7 +13,7 @@
   changed_when: es_xpack_state.rc == 0
   when:
     - es_xpack_installed.rc == 0
-    - es_update|changed
+    - es_update is changed
 
 - name: Download x-pack plugin from elastic.co
   get_url:
@@ -22,18 +22,18 @@
     timeout: '30'
     validate_certs: 'no'
   when:
-    - es_xpack_installed.rc == 1 or es_update|changed
+    - es_xpack_installed.rc == 1 or es_update is changed
 
 - name: Install x-pack plugin from elastic.co
   become: yes
   shell: '/usr/share/elasticsearch/bin/elasticsearch-plugin install --silent --batch file:///tmp/x-pack-{{ elastic_version }}.zip'
   register: es_xpack_state
   when:
-    - es_xpack_installed.rc == 1 or es_update|changed
+    - es_xpack_installed.rc == 1 or es_update is changed
 
 - name: Remove x-pack plugin local file
   file:
     state: 'absent'
     path: '/tmp/x-pack/x-pack-{{ elastic_version }}.zip'
   when:
-    - es_xpack_installed.rc == 1 or es_update|changed
+    - es_xpack_installed.rc == 1 or es_update is changed

@@ -1,9 +1,12 @@
 ---
 - name: Allow Elasticsearch service port
   firewalld:
-    port: '{{ item.value }}/tcp'
+    port: '{{ item }}/tcp'
     zone: 'public'
     permanent: 'true'
     immediate: 'true'
     state: 'enabled'
-  with_dict: '{{ elastic_port_arg }}'
+  with_items:
+    - '{{ elastic_port_rest }}'
+    - '{{ elastic_port_node }}'
+    - '{{ elastic_port_exporter }}'

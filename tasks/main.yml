@@ -16,12 +16,12 @@
 
 - name: Install x-pack plugins
   include: 'xpack.yml'
-  when: elastic_xpack
+  when: elastic_auth
 
 - name: Reload the Elasticsearch service
   shell: echo ''
   notify: 'Ensure Elasticsearch service is enabled'
-  when: es_update|changed or es_config|changed or es_xpack_state|changed
+  when: es_update is changed or es_config is changed or es_xpack_state is changed
 
 - name: Force the handler to run immediately
   meta: flush_handlers
@@ -29,8 +29,8 @@
 - name: Include authentication tasks
   include: 'authentication.yml'
   when:
-    - elastic_xpack 
-    - es_xpack_state|changed or es_xpack_state|changed
+    - elastic_auth 
+    - es_xpack_state is changed or es_xpack_state is changed
 
 - name: Include prometheus exporter tasks
   include: 'exporter.yml'

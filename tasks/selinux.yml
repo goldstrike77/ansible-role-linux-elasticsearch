@@ -19,10 +19,13 @@
 
 - name: 'Allow elasticsearch to listen on tcp port'
   seport:
-    ports: '{{ item.value }}'
+    ports: '{{ item }}'
     proto: 'tcp'
     setype: 'http_port_t'
     state: 'present'
-  loop: '{{ elastic_port_arg|dict2items }}'
+  with_items:
+    - '{{ elastic_port_rest }}'
+    - '{{ elastic_port_node }}'
+    - '{{ elastic_port_exporter }}'
   when:
     - elastic_selinux

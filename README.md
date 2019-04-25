@@ -55,7 +55,7 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 ##### General parameters
 * `elastic_path`: Specify the Elasticsearch data directory.
 * `elastic_selinux`: SELinux security policy.
-* `elastic_xpack`: Whether install x-pack plugins.
+* `elastic_auth`: A boolean value, Enable or Disable authentication.
 * `elastic_pass`: Authorization password.
 
 ##### Service Mesh
@@ -66,9 +66,9 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `consul_http_port`: The consul HTTP API port.
 
 ##### Listen port
-* `elastic_port_arg.rest`: Elasticsearch REST port.
-* `elastic_port_arg.node`: Elasticsearch nodes communication port.
-* `elastic_port_arg.exporter`: Prometheus Elasticsearch Exporter port.
+* `elastic_port_rest`: Elasticsearch REST port.
+* `elastic_port_node`: Elasticsearch nodes communication port.
+* `elastic_port_exporter`: Prometheus Elasticsearch Exporter port.
 
 ##### Server System Variables
 * `elastic_arg.action_destructive_requires_name`: Restricts deletions to specific names, instead of allowing the special _all or wildcard options.
@@ -112,17 +112,16 @@ You can also use the group_vars or the host_vars files for setting the variables
     elastic_version: '5.6.16'
     elastic_path: '/data'
     elastic_selinux: false
-    elastic_xpack: false
+    elastic_auth: false
     elastic_pass: 'password'
     environments: 'SIT'
     consul_is_register: false
     consul_exporter_token: '00000000-0000-0000-0000-000000000000'
     consul_clients: 'localhost'
     consul_http_port: '8500'
-    elastic_port_arg:
-      rest: '9200'
-      node: '9300'
-      exporter: '9108'
+    elastic_port_rest: '9200'
+    elastic_port_node: '9300'
+    elastic_port_exporter: '9108'
     elastic_arg:
       action_destructive_requires_name: true
       bootstrap_memory_lock: false

@@ -4,7 +4,7 @@
 elastic_version: '5.6.16' # Specify the Elasticsearch version, minimum 2.
 elastic_path: '/data' # Specify the Elasticsearch data directory.
 elastic_selinux: false # SELinux security policy.
-elastic_xpack: false # Whether install x-pack plugins.
+elastic_auth: false # A boolean value, Enable or Disable authentication.
 elastic_pass: 'password' # Authorization user password.
 
 # Service Mesh #
@@ -15,10 +15,9 @@ consul_clients: 'localhost' # List of consul clients.
 consul_http_port: '8500' # The consul HTTP API port.
 
 # Listen port #
-elastic_port_arg:
-  rest: '9200' # Elasticsearch REST.
-  node: '9300' # Elasticsearch nodes communication.
-  exporter: '9108' # Prometheus Elasticsearch Exporter.
+elastic_port_rest: '9200' # Elasticsearch REST.
+elastic_port_node: '9300' # Elasticsearch nodes communication.
+elastic_port_exporter: '9108' # Prometheus Elasticsearch Exporter.
 
 # Server System Variables #
 elastic_arg:
