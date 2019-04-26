@@ -57,6 +57,7 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `elastic_selinux`: SELinux security policy.
 * `elastic_auth`: A boolean value, Enable or Disable authentication.
 * `elastic_pass`: Authorization password.
+* `elastic_heap_size`: Specify the maximum memory allocation pool for a Java virtual machine.
 
 ##### Service Mesh
 * `environments`: Define the service environment.
@@ -73,7 +74,6 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 ##### Server System Variables
 * `elastic_arg.action_destructive_requires_name`: Restricts deletions to specific names, instead of allowing the special _all or wildcard options.
 * `elastic_arg.bootstrap_memory_lock`: Lock the process address space into RAM.
-* `elastic_arg.es_heap_size`: Specify the maximum memory allocation pool for a Java virtual machine.
 * `elastic_arg.http_compression`: Compression when possible with Accept-Encoding.
 * `elastic_arg.http_cors_enabled`: Enable or disable cross-origin resource sharing.
 * `elastic_arg.http_cors_allow_methods`: Which methods to allow.
@@ -114,6 +114,7 @@ You can also use the group_vars or the host_vars files for setting the variables
     elastic_selinux: false
     elastic_auth: false
     elastic_pass: 'password'
+    elastic_heap_size: '3g'
     environments: 'SIT'
     consul_is_register: false
     consul_exporter_token: '00000000-0000-0000-0000-000000000000'
@@ -125,7 +126,6 @@ You can also use the group_vars or the host_vars files for setting the variables
     elastic_arg:
       action_destructive_requires_name: true
       bootstrap_memory_lock: false
-      es_heap_size: '4g'
       http_compression: true
       http_cors_enabled: true
       http_cors_allow_methods: 'HEAD, GET, POST, PUT, DELETE'

@@ -18,9 +18,9 @@
 
 # Xms represents the initial size of total heap space
 # Xmx represents the maximum size of total heap space
-{% if elastic_arg.es_heap_size is defined %}
--Xms{{ elastic_arg.es_heap_size }}
--Xmx{{ elastic_arg.es_heap_size }}
+{% if elastic_heap_size is defined %}
+-Xms{{ elastic_heap_size }}
+-Xmx{{ elastic_heap_size }}
 {% else %}
 -Xms2g
 -Xmx2g
