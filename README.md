@@ -48,12 +48,12 @@ In order to get the Elasticsearch running, you'll have to define the following p
 
 * `elastic_is_install`: A boolean value, whether install the ElasticSearch.
 * `elastic_cluster`: Specify name for your cluster name.
-* `elastic_version`: Specify the Elasticsearch version.
 
 ### Main parameters #
 There are some variables in defaults/main.yml which can (Or needs to) be overridden:
 
 ##### General parameters
+* `elastic_version`: Specify the Elasticsearch version.
 * `elastic_path`: Specify the Elasticsearch data directory.
 * `elastic_selinux`: SELinux security policy.
 * `elastic_auth`: A boolean value, Enable or Disable authentication.
