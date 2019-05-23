@@ -5,12 +5,15 @@
     description: '{{ elastic_repo_name }} YUM repository'
     file: '{{ elastic_repo_name }}'
     baseurl: '{{ elastic_artifacts_repo_url }}'
-    gpgcheck: no
+    gpgcheck: 'no'
+    timeout: '60'
 
 - name: Install the Elasticsearch packages
   yum:
     name: '{{ item }}'
     state: 'present'
+    validate_certs: 'no'
+    disable_gpg_check: 'yes'
   with_items:
     - '{{ elastic_packages }}'
   register: es_update
