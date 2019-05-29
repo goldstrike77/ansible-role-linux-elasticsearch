@@ -34,6 +34,6 @@
 - name: Remove x-pack plugin local file
   file:
     state: 'absent'
-    path: '/tmp/x-pack/x-pack-{{ elastic_version }}.zip'
+    path: '/tmp/x-pack-{{ elastic_version }}.zip'
   when:
     - es_xpack_installed.rc == 1 or es_update is changed
