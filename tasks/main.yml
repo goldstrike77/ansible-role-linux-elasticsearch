@@ -43,7 +43,7 @@
   include: 'authentication.yml'
   when:
     - elastic_auth 
-    - es_xpack_state is changed or es_xpack_state is changed
+    - es_xpack_state is changed
 
 - name: Include prometheus exporter tasks
   include: 'exporter.yml'
