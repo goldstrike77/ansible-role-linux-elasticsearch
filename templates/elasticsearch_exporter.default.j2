@@ -1,1 +1,1 @@
-ELASTICSEARCH_EXPORTER_OPTS='-es.uri=http://{% if elastic_auth %}elastic:{{ elastic_pass }}@{% endif %}127.0.0.1:{{ elastic_port_rest }} -web.listen-address :{{ elastic_port_exporter }} -{{ " -".join(vars["elastic_exporter_collector"]) }}'
+ELASTICSEARCH_EXPORTER_OPTS='-es.uri=http://{% if elastic_auth %}elastic:{{ elastic_pass | urlencode }}@{% endif %}127.0.0.1:{{ elastic_port_rest }} -web.listen-address :{{ elastic_port_exporter }} -{{ " -".join(vars["elastic_exporter_collector"]) }}'
