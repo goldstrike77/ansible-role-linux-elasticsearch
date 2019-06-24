@@ -34,7 +34,7 @@ path.data: {{ elastic_path }}/elasticsearch
 #
 # Path to log files:
 #
-#path.logs: /path/to/logs
+path.logs: /var/log/elasticsearch
 #
 # ----------------------------------- Memory -----------------------------------
 #
@@ -64,15 +64,15 @@ http.port: {{ elastic_port_rest }}
 #
 # Pass an initial list of hosts to perform discovery when new node is started:
 # The default list of hosts is ["127.0.0.1", "[::1]"]
-#
-#discovery.zen.ping.unicast.hosts: ["host1", "host2"]
-#
+{% if elastic_version.split('.')[0] == '7' %}
+discovery.seed_hosts: ['{{ elastic_servers | list | join(":" + elastic_port_node + "', '") }}:{{ elastic_port_node }}']
+cluster.initial_master_nodes: ['{{ elastic_servers | list | join(":" + elastic_port_node + "', '") }}:{{ elastic_port_node }}']
+{% else %}
 discovery.zen.fd.ping_timeout: 30s
 discovery.zen.ping.unicast.hosts: ['{{ elastic_servers | list | join(":" + elastic_port_node + "', '") }}:{{ elastic_port_node }}']
-#
-# Prevent the "split brain" by configuring the majority of nodes (total number of master-eligible nodes / 2 + 1):
-#
 discovery.zen.minimum_master_nodes: {{ (elastic_servers | length / 2 + 1) | int }}
+{% endif %}
+
 #
 # For more information, consult the zen discovery module documentation.
 #
@@ -92,9 +92,3 @@ action.destructive_requires_name: {{ elastic_arg.action_destructive_requires_nam
 http.compression: {{ elastic_arg.http_compression | bool | to_json }}
 http.cors.enabled: {{ elastic_arg.http_cors_enabled | bool | to_json }}
 http.cors.allow-methods: {{ elastic_arg.http_cors_allow_methods }}
-{% if elastic_auth %}
-xpack.monitoring.enabled: {{ elastic_arg.xpack_monitoring_enabled | bool | to_json }} 
-xpack.security.audit.enabled: {{ elastic_arg.xpack_security_audit_enabled | bool | to_json }}
-xpack.graph.enabled: {{ elastic_arg.xpack_graph_enabled | bool | to_json }}
-xpack.watcher.enabled: {{ elastic_arg.xpack_watcher_enabled | bool | to_json }}
-{% endif %}

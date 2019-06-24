@@ -9,12 +9,6 @@ elastic_xpack_builtin_user:
 elastic_folder:
   - '{{ elastic_path }}/elasticsearch'
 
-elastic_conf_scripts:
-  - { src: 'elasticsearch.service.j2',   dest: '/lib/systemd/system/elasticsearch.service' }
-  - { src: 'elasticsearch.yml.j2',       dest: '/etc/elasticsearch/elasticsearch.yml' }
-  - { src: 'elasticsearch.sysconfig.j2', dest: '/etc/sysconfig/elasticsearch' }
-  - { src: 'jvm.options.j2',             dest: '/etc/elasticsearch/jvm.options' }
-
 elastic_kernel_parameters:
   - { variable: 'vm.max_map_count', value: '262144' }
   - { variable: 'vm.swappiness', value: '10' }

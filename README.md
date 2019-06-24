@@ -38,7 +38,7 @@ This role will work on the following operating systems:
 
 The following list of supported the Elasticsearch releases:
 
-* Elasticsearch 5
+* Elasticsearch 5,6,7
 
 ## Role variables
 ### Main parameters #
@@ -71,10 +71,6 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `elastic_arg.http_compression`: Compression when possible with Accept-Encoding.
 * `elastic_arg.http_cors_enabled`: Enable or disable cross-origin resource sharing.
 * `elastic_arg.http_cors_allow_methods`: Which methods to allow.
-* `elastic_arg.xpack_graph_enabled`: Enable X-Pack graph on the node.
-* `elastic_arg.xpack_monitoring_enabled`: Enable X-Pack monitoring on the node.
-* `elastic_arg.xpack_security_audit_enabled`: Enable X-Pack auditing on the node.
-* `elastic_arg.xpack_watcher_enabled`: Enable X-Pack watcher on the node.
 
 ### Other parameters
 There are some variables in vars/main.yml:
@@ -119,10 +115,6 @@ You can also use the group_vars or the host_vars files for setting the variables
       http_compression: true
       http_cors_enabled: true
       http_cors_allow_methods: 'HEAD, GET, POST, PUT, DELETE'
-      xpack_graph_enabled: false
-      xpack_monitoring_enabled: false
-      xpack_security_audit_enabled: false
-      xpack_watcher_enabled: false
     environments: 'SIT'
     consul_public_register: false
     consul_public_exporter_token: '00000000-0000-0000-0000-000000000000'
