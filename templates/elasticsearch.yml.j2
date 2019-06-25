@@ -92,3 +92,7 @@ action.destructive_requires_name: {{ elastic_arg.action_destructive_requires_nam
 http.compression: {{ elastic_arg.http_compression | bool | to_json }}
 http.cors.enabled: {{ elastic_arg.http_cors_enabled | bool | to_json }}
 http.cors.allow-methods: {{ elastic_arg.http_cors_allow_methods }}
+{% if elastic_auth and elastic_version.split('.')[0] != '5' %}
+xpack.security.enabled: true
+xpack.security.transport.ssl.enabled: true
+{% endif %}

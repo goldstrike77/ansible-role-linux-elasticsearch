@@ -18,7 +18,7 @@
   uri:
     url: 'http://127.0.0.1:{{ elastic_port_rest }}/_xpack/security/user/{{ item }}/_password'
     method: 'POST'
-    user: '{{ item }}'
+    user: 'elastic'
     password: 'changeme'
     body: '{"password": "{{ elastic_pass }}"}'
     body_format: 'json'
@@ -28,6 +28,27 @@
     no_proxy: '127.0.0.1'
   register: es_auth_status
   until: es_auth_status.status == 200
-  retries: 24
-  delay: 5
+  retries: 3
+  delay: 3
+  changed_when: false
+  failed_when: false
+  no_log: true
+
+- name: Change Elasticsearch superuser password
+  uri:
+    url: 'http://127.0.0.1:{{ elastic_port_rest }}/_xpack/security/user/elastic/_password'
+    method: 'POST'
+    user: 'elastic'
+    password: 'changeme'
+    body: '{"password": "{{ elastic_pass }}"}'
+    body_format: 'json'
+    force_basic_auth: 'yes'
+  environment:
+    no_proxy: '127.0.0.1'
+  register: es_auth_status
+  until: es_auth_status.status == 200
+  retries: 3
+  delay: 3
+  changed_when: false
+  failed_when: false
   no_log: true

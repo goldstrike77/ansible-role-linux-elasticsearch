@@ -1,13 +1,11 @@
 ---
-- name: Creating Elasticsearch folder
+- name: Creating Elasticsearch data folder
   file:
-    dest: '{{ item }}'
+    dest: '{{ elastic_path }}/elasticsearch'
     state: directory
     owner: elasticsearch
     group: elasticsearch
     mode: 0755
-  with_items:
-    - '{{ elastic_folder }}'
 
 - name: Configure kernel parameters
   sysctl:

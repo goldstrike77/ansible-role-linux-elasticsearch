@@ -38,7 +38,7 @@ This role will work on the following operating systems:
 
 The following list of supported the Elasticsearch releases:
 
-* Elasticsearch 5,6,7
+* Elasticsearch 5.6+, 6.8+, 7.1+
 
 ## Role variables
 ### Main parameters #
@@ -93,13 +93,12 @@ Including an example of how to use your role (for instance, with variables passe
     - hosts: all
       roles:
          - role: ansible-role-linux-elasticsearch
-           elastic_cluster: 'graylog'
+           elastic_cluster: 'syslog'
 
 ### Combination of group vars and playbook
 You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: group_vars/all or host_vars/`group_name`
 
-    elastic_is_install: true
-    elastic_cluster: 'graylog'
+    elastic_cluster: 'syslog'
     elastic_version: '5.6.16'
     elastic_path: '/data'
     elastic_selinux: false

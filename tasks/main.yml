@@ -12,43 +12,45 @@
       {{ _elastic_servers }}"
   when: elastic_servers is not defined
 
-- name: Include OS-specific variables
-  include_vars: '{{ ansible_os_family }}.yml'
+- name: Check if Elasticsearch data exists
+  stat:
+    path: '{{ elastic_path }}/elasticsearch/nodes'
+  register: result
 
-- name: Include tasks for specific OS
-  include: '{{ ansible_os_family }}.yml'
-
-- name: Straight to getenforce selinux status
-  include: 'selinux.yml'
-
-- name: Include firewall tasks
-  include: 'firewall.yml'
-
-- name: Configuration the consul
-  include: 'configureation.yml'
-
-- name: Install x-pack plugins
-  include: 'xpack.yml'
+- name: Elasticsearch operation
+  block:
+    - name: Include OS-specific variables
+      include_vars: '{{ ansible_os_family }}.yml'
+    - name: Include tasks for specific OS
+      include: '{{ ansible_os_family }}.yml'
+    - name: Straight to getenforce selinux status
+      include: 'selinux.yml'
+    - name: Include firewall tasks
+      include: 'firewall.yml'
+    - name: Configuration the elasticsearch
+      include: 'configureation.yml'
+    - name: Install x-pack plugins
+      include: 'xpack.yml'
+      when:
+        - elastic_auth
+        - elastic_version.split('.')[0] == '5'
+    - name: Create Bootstrap password for elastic user
+      shell: "echo 'changeme' | /usr/share/elasticsearch/bin/elasticsearch-keystore add -x 'bootstrap.password'"
+      when:
+        - elastic_auth
+        - elastic_version.split('.')[0] != '5'
+    - name: Reload the Elasticsearch service
+      shell: echo ''
+      notify: 'Ensure Elasticsearch service is enabled'
+      when: es_update is changed or es_config is changed or es_xpack_state is changed or es_jvm is changed or es_sysconfig is changed
+    - name: Force the handler to run immediately
+      meta: flush_handlers
+    - name: Include authentication tasks
+      include: 'authentication.yml'
+      when: elastic_auth 
+    - name: Include prometheus exporter tasks
+      include: 'exporter.yml'
+    - include_tasks: 'register.yml'
+      when: consul_public_register
   when:
-    - elastic_auth
-    - elastic_version.split('.')[0] | int < 6
-
-- name: Reload the Elasticsearch service
-  shell: echo ''
-  notify: 'Ensure Elasticsearch service is enabled'
-  when: es_update is changed or es_config is changed or es_xpack_state is changed or es_jvm is changed or es_sysconfig is changed
-
-- name: Force the handler to run immediately
-  meta: flush_handlers
-
-- name: Include authentication tasks
-  include: 'authentication.yml'
-  when:
-    - elastic_auth 
-    - es_xpack_state is changed
-
-- name: Include prometheus exporter tasks
-  include: 'exporter.yml'
-
-- include_tasks: 'register.yml'
-  when: consul_public_register
+    - not result.stat.exists

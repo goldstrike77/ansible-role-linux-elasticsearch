@@ -2,12 +2,11 @@
 elastic_plugin_url: 'http://artifacts.elastic.co/downloads/packs'
 
 elastic_xpack_builtin_user:
-  - 'elastic'
+  - 'apm_system'
+  - 'beats_system'
   - 'kibana'
   - 'logstash_system'
-
-elastic_folder:
-  - '{{ elastic_path }}/elasticsearch'
+  - 'remote_monitoring_user'
 
 elastic_kernel_parameters:
   - { variable: 'vm.max_map_count', value: '262144' }
