@@ -52,6 +52,7 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `elastic_auth`: A boolean value, Enable or Disable authentication.
 * `elastic_pass`: Authorization password.
 * `elastic_heap_size`: Specify the maximum memory allocation pool for a Java virtual machine.
+* `elastic_node_type`: Type of nodes: default, master, data, ingest and coordinat.
 
 ##### Service Mesh
 * `environments`: Define the service environment.
@@ -62,7 +63,7 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 
 ##### Listen port
 * `elastic_port_rest`: Elasticsearch REST port.
-* `elastic_port_node`: Elasticsearch nodes communication port.
+* `elastic_port_transport`: Elasticsearch transport port ragne.
 * `elastic_port_exporter`: Prometheus Elasticsearch Exporter port.
 
 ##### Server System Variables
@@ -83,9 +84,9 @@ There are no dependencies on other roles.
 ### Hosts inventory file
 See tests/inventory for an example.
 
-    node01 ansible_host='192.168.1.10' elastic_cluster='graylog'
-    node02 ansible_host='192.168.1.11' elastic_cluster='graylog'
-    node03 ansible_host='192.168.1.12' elastic_cluster='graylog'
+    node01 ansible_host='192.168.1.10' elastic_cluster='syslog'
+    node02 ansible_host='192.168.1.11' elastic_cluster='syslog'
+    node03 ansible_host='192.168.1.12' elastic_cluster='syslog'
 
 ### Vars in role configuration
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
@@ -105,8 +106,9 @@ You can also use the group_vars or the host_vars files for setting the variables
     elastic_auth: false
     elastic_pass: 'password'
     elastic_heap_size: '3g'
+    elastic_node_type: 'default'
     elastic_port_rest: '9200'
-    elastic_port_node: '9300'
+    elastic_port_transport: '9300-9400'
     elastic_port_exporter: '9108'
     elastic_arg:
       action_destructive_requires_name: true

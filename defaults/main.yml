@@ -8,6 +8,7 @@ elastic_selinux: false # SELinux security policy.
 elastic_auth: false # A boolean value, Enable or Disable authentication.
 elastic_pass: 'changeme' # Authorization user password.
 elastic_heap_size: '3g' # Specify the maximum memory allocation pool for a Java virtual machine.
+elastic_node_type: 'default' # Type of nodes: default, master, data, ingest and coordinat.
 
 # Service Mesh #
 environments: 'SIT' # Define the service environment.
@@ -19,7 +20,7 @@ consul_public_clients: # List of public consul clients.
 
 # Listen port #
 elastic_port_rest: '9200' # Elasticsearch REST.
-elastic_port_node: '9300' # Elasticsearch nodes communication.
+elastic_port_transport: '9300-9400' # Elasticsearch transport port ragne.
 elastic_port_exporter: '9108' # Prometheus Elasticsearch Exporter.
 
 # Server System Variables #

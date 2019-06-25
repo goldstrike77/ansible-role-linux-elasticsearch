@@ -8,5 +8,5 @@
     state: 'enabled'
   with_items:
     - '{{ elastic_port_rest }}'
-    - '{{ elastic_port_node }}'
+    - '{{ elastic_port_transport }}'
     - '{{ elastic_port_exporter }}'
