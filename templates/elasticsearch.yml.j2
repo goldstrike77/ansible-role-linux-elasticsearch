@@ -65,11 +65,11 @@ http.port: {{ elastic_port_rest }}
 # Pass an initial list of hosts to perform discovery when new node is started:
 # The default list of hosts is ["127.0.0.1", "[::1]"]
 {% if elastic_version.split('.')[0] == '7' %}
-discovery.seed_hosts: ['{{ elastic_servers | list | join(":" + elastic_port_node + "', '") }}:{{ elastic_port_node }}']
-cluster.initial_master_nodes: ['{{ elastic_servers | list | join(":" + elastic_port_node + "', '") }}:{{ elastic_port_node }}']
+discovery.seed_hosts: ['{{ elastic_servers | list | join(":" + elastic_port_transport + "', '") }}:{{ elastic_port_transport }}']
+cluster.initial_master_nodes: ['{{ elastic_servers | list | join(":" + elastic_port_transport + "', '") }}:{{ elastic_port_transport }}']
 {% else %}
 discovery.zen.fd.ping_timeout: 30s
-discovery.zen.ping.unicast.hosts: ['{{ elastic_servers | list | join(":" + elastic_port_node + "', '") }}:{{ elastic_port_node }}']
+discovery.zen.ping.unicast.hosts: ['{{ elastic_servers | list | join(":" + elastic_port_transport + "', '") }}:{{ elastic_port_transport }}']
 discovery.zen.minimum_master_nodes: {{ (elastic_servers | length / 2 + 1) | int }}
 {% endif %}
 
@@ -100,15 +100,15 @@ xpack.security.transport.ssl.enabled: true
 node.master: false
 node.data: false
 node.ingest: false
-{% elif if elastic_node_type == 'master' %}
+{% elif elastic_node_type == 'master' %}
 node.master: true
 node.data: false
 node.ingest: false
-{% elif if elastic_node_type == 'data' %}
+{% elif elastic_node_type == 'data' %}
 node.master: false
 node.data: true
 node.ingest: false
-{% elif if elastic_node_type == 'ingest' %}
+{% elif elastic_node_type == 'ingest' %}
 node.master: false
 node.data: false
 node.ingest: true

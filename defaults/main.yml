@@ -20,7 +20,7 @@ consul_public_clients: # List of public consul clients.
 
 # Listen port #
 elastic_port_rest: '9200' # Elasticsearch REST.
-elastic_port_transport: '9300-9400' # Elasticsearch transport port ragne.
+elastic_port_transport: '9300' # Elasticsearch transport port ragne.
 elastic_port_exporter: '9108' # Prometheus Elasticsearch Exporter.
 
 # Server System Variables #
