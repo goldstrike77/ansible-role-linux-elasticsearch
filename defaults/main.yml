@@ -2,7 +2,7 @@
 # General parameters #
 elastic_is_install: false # A boolean value, whether install the ElasticSearch.
 elastic_cluster: 'default' # Specify name for your cluster name.
-elastic_version: '5.6.16' # Specify the Elasticsearch version, minimum 2.
+elastic_version: '5.6.16' # Specify the Elasticsearch version.
 elastic_path: '/data' # Specify the Elasticsearch data directory.
 elastic_selinux: false # SELinux security policy.
 elastic_auth: false # A boolean value, Enable or Disable authentication.
