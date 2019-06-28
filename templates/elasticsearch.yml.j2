@@ -92,9 +92,14 @@ action.destructive_requires_name: {{ elastic_arg.action_destructive_requires_nam
 http.compression: {{ elastic_arg.http_compression | bool | to_json }}
 http.cors.enabled: {{ elastic_arg.http_cors_enabled | bool | to_json }}
 http.cors.allow-methods: {{ elastic_arg.http_cors_allow_methods }}
-{% if elastic_auth and elastic_version.split('.')[0] != '5' %}
+{% if elastic_auth %}
 xpack.security.enabled: true
 xpack.security.transport.ssl.enabled: true
+xpack.security.transport.ssl.supported_protocols: TLSv1.2
+xpack.security.transport.ssl.client_authentication: none
+xpack.security.transport.ssl.verification_mode: none
+xpack.security.transport.ssl.key: /etc/elasticsearch/ssl/server.key
+xpack.security.transport.ssl.certificate: /etc/elasticsearch/ssl/certificate.pem
 {% endif %}
 {% if elastic_node_type == 'coordinat' %}
 node.master: false

@@ -42,7 +42,7 @@
     - name: Reload the Elasticsearch service
       shell: echo ''
       notify: 'Ensure Elasticsearch service is enabled'
-      when: es_update is changed or es_config is changed or es_xpack_state is changed or es_jvm is changed or es_sysconfig is changed
+      when: es_update is changed or es_config is changed or es_xpack_state is changed or es_jvm is changed or es_sysconfig is changed es_pki is changed
     - name: Force the handler to run immediately
       meta: flush_handlers
     - name: Include authentication tasks

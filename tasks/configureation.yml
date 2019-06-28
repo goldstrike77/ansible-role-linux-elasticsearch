@@ -49,3 +49,12 @@
     - { regexp: '^MAX_LOCKED_MEMORY', line: 'MAX_LOCKED_MEMORY=unlimited' }
     - { regexp: '^MAX_MAP_COUNT', line: 'MAX_MAP_COUNT=262144' }
   register: es_sysconfig
+
+- name: Elasticsearch PKI file transfer
+  copy:
+    src: 'ssl/'
+    dest: '/etc/elasticsearch/ssl'
+    owner: 'root'
+    group: 'root'
+    mode: 0644
+  register: es_pki
