@@ -10,7 +10,7 @@
         {% endif %}\
       {% endfor %}\
       {{ _elastic_servers }}"
-  when: elastic_servers is not defined
+  when: elastic_servers is not defined or elastic_servers | length < 1
 
 - name: Check if Elasticsearch data exists
   stat:
