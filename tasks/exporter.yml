@@ -23,7 +23,7 @@
     dest: '/etc/default/elasticsearch_exporter'
     owner: 'root'
     group: 'root'
-    mode: 0644
+    mode: '0644'
   register: conf_update
 
 - name: Prometheus elasticsearch exporter service is enabled

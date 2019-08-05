@@ -50,7 +50,10 @@
       when: elastic_auth 
     - name: Include prometheus exporter tasks
       include: 'exporter.yml'
+      when: exporter_is_install
     - include_tasks: 'register.yml'
-      when: consul_public_register
+      when:
+        - exporter_is_install
+        - consul_public_register
   when:
     - not result.stat.exists

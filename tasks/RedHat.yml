@@ -14,8 +14,11 @@
     state: 'present'
     validate_certs: 'no'
     disable_gpg_check: 'yes'
-  with_items:
-    - '{{ elastic_dependent_packages }}'
+  loop: '{{ elastic_dependent_packages|flatten(levels=1) }}'
+  register: yum_status
+  until: yum_status is succeeded
+  retries: 3
+  delay: 5
 
 - name: Install the Elasticsearch packages
   yum:
@@ -25,6 +28,8 @@
     validate_certs: 'no'
     update_cache: 'yes'
     disable_gpg_check: 'yes'
-  with_items:
-    - '{{ elastic_packages }}'
+  loop: '{{ elastic_packages|flatten(levels=1) }}'
   register: es_update
+  until: es_update is succeeded
+  retries: 3
+  delay: 5

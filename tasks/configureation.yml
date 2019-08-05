@@ -2,18 +2,18 @@
 - name: Creating Elasticsearch data folder
   file:
     dest: '{{ elastic_path }}/elasticsearch'
-    state: directory
-    owner: elasticsearch
-    group: elasticsearch
-    mode: 0755
+    state: 'directory'
+    owner: 'elasticsearch'
+    group: 'elasticsearch'
+    mode: '0755'
 
 - name: Configure kernel parameters
   sysctl:
     name: '{{ item.variable }}'
     value: '{{ item.value }}'
-    state: present
-    reload: yes
-    sysctl_set: yes
+    state: 'present'
+    reload: 'yes'
+    sysctl_set: 'yes'
     sysctl_file: /etc/sysctl.d/20-sysctl.conf
   with_items:
     - '{{ elastic_kernel_parameters }}'
@@ -22,9 +22,10 @@
   template:
     src: 'elasticsearch.yml.j2'
     dest: '/etc/elasticsearch/elasticsearch.yml'
-    owner: root
-    group: root
-    mode: 0644
+    backup: 'yes'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
   register: es_config
 
 - name: Elasticsearch JVM options configuration
@@ -40,7 +41,7 @@
 
 - name: Elasticsearch system configuration
   lineinfile:
-    state: present
+    state: 'present'
     dest: '/etc/sysconfig/elasticsearch'
     regexp: '{{ item.regexp }}'
     line: '{{ item.line }}'
