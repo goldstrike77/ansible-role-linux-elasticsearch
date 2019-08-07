@@ -56,6 +56,6 @@
     src: 'ssl/'
     dest: '/etc/elasticsearch/ssl'
     owner: 'root'
-    group: 'root'
-    mode: 0644
+    group: 'elasticsearch'
+    mode: '0644'
   register: es_pki
