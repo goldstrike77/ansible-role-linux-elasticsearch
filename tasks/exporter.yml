@@ -10,12 +10,10 @@
 
 - name: Install the Prometheus elasticsearch exporter packages
   yum:
-    name: '{{ item }}'
+    name: '{{ elastic_exporter_packages }}'
     state: 'present'
     validate_certs: 'no'
     disable_gpg_check: 'yes'
-  with_items:
-    - '{{ elastic_exporter_packages }}'
 
 - name: Prometheus elasticsearch exporter configure file transfer
   template:
