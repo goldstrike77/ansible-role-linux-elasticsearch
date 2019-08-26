@@ -32,12 +32,12 @@
     - name: Install x-pack plugins
       include: 'xpack.yml'
       when:
-        - elastic_auth
+        - elastic_auth | bool
         - elastic_version.split('.')[0] == '5'
     - name: Create Bootstrap password for elastic user
       shell: "echo 'changeme' | /usr/share/elasticsearch/bin/elasticsearch-keystore add -x 'bootstrap.password'"
       when:
-        - elastic_auth
+        - elastic_auth | bool
         - elastic_version.split('.')[0] != '5'
     - name: Reload the Elasticsearch service
       shell: echo ''
@@ -47,13 +47,13 @@
       meta: flush_handlers
     - name: Include authentication tasks
       include: 'authentication.yml'
-      when: elastic_auth 
+      when: elastic_auth | bool
     - name: Include prometheus exporter tasks
       include: 'exporter.yml'
       when: exporter_is_install
     - include_tasks: 'register.yml'
       when:
-        - exporter_is_install
-        - consul_public_register
+        - exporter_is_install | bool
+        - consul_public_register | bool
   when:
     - not result.stat.exists

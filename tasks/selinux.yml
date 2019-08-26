@@ -28,4 +28,4 @@
     - '{{ elastic_port_transport }}'
     - '{{ elastic_port_exporter }}'
   when:
-    - elastic_selinux
+    - elastic_selinux | bool
