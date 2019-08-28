@@ -55,6 +55,8 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `elastic_node_type`: Type of nodes: default, master, data, ingest and coordinat.
 
 ##### Service Mesh
+* `subscription`: Define the service subscription.
+* `region`: Define the service region.
 * `environments`: Define the service environment.
 * `exporter_is_install`: Whether to install prometheus exporter.
 * `consul_public_register`: Whether register a exporter service with public consul client.
@@ -117,6 +119,8 @@ You can also use the group_vars or the host_vars files for setting the variables
       http_compression: true
       http_cors_enabled: true
       http_cors_allow_methods: 'HEAD, GET, POST, PUT, DELETE'
+    subscription: 'default'
+    region: 'default'
     environments: 'SIT'
     exporter_is_install: false
     consul_public_register: false
