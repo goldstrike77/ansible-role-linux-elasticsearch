@@ -93,6 +93,7 @@ http.compression: {{ elastic_arg.http_compression | bool | to_json }}
 http.cors.enabled: {{ elastic_arg.http_cors_enabled | bool | to_json }}
 http.cors.allow-methods: {{ elastic_arg.http_cors_allow_methods }}
 {% if elastic_auth %}
+xpack.security.audit.enabled: true
 xpack.security.enabled: true
 xpack.security.transport.ssl.enabled: true
 xpack.security.transport.ssl.supported_protocols: TLSv1.2
