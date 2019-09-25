@@ -2,8 +2,9 @@
 elastic_repo_name: 'elasticsearch'
 elastic_artifacts_repo_url: "http://mirrors.tuna.tsinghua.edu.cn/elasticstack/{{ elastic_version.split('.')[0] }}.x/yum"
 elastic_dependent_packages:
-  - 'java-1.8.0-openjdk-headless'
-  - 'policycoreutils-python'
+  - 'java-1.8.0-openjdk-headless'
+  - 'libselinux-utils'
+  - 'policycoreutils-python'
 elastic_packages:
   - 'elasticsearch-{{ elastic_version }}*'
 

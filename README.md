@@ -48,7 +48,6 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `elastic_cluster`: Specify name for your cluster name.
 * `elastic_version`: Specify the Elasticsearch version.
 * `elastic_path`: Specify the Elasticsearch data directory.
-* `elastic_selinux`: SELinux security policy.
 * `elastic_auth`: A boolean value, Enable or Disable authentication.
 * `elastic_pass`: Authorization password.
 * `elastic_heap_size`: Specify the maximum memory allocation pool for a Java virtual machine.
@@ -104,7 +103,6 @@ You can also use the group_vars or the host_vars files for setting the variables
     elastic_cluster: 'syslog'
     elastic_version: '5.6.16'
     elastic_path: '/data'
-    elastic_selinux: false
     elastic_auth: false
     elastic_pass: 'password'
     elastic_heap_size: '3g'
