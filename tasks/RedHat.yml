@@ -1,4 +1,7 @@
 ---
+- name: Include OS-specific variables
+  include_vars: '{{ ansible_os_family }}.yml'
+
 - name: 'Add Elasticsearch {{ elastic_version.split(".")[0] }} YUM repositories'
   yum_repository:
     name: '{{ elastic_repo_name }}'
