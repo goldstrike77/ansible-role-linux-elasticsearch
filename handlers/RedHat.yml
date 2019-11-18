@@ -2,9 +2,9 @@
 - name: Enable Elasticsearch service
   systemd:
     name: 'elasticsearch.service'
-    enabled: yes
-    state: restarted
-    daemon_reload: yes
+    enabled: 'yes'
+    state: 'restarted'
+    daemon_reload: 'yes'
   async: 1
   poll: 0
   listen: Ensure Elasticsearch service is enabled

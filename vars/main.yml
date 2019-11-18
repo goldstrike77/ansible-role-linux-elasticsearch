@@ -15,3 +15,5 @@ elastic_kernel_parameters:
 elastic_exporter_collector:
 #  - 'es.all'
   - 'es.indices'
+
+elastic_tmpdir: '/var/run/elasticsearch'

@@ -14,7 +14,7 @@
     state: 'present'
     reload: 'yes'
     sysctl_set: 'yes'
-    sysctl_file: /etc/sysctl.d/20-sysctl.conf
+    sysctl_file: '/etc/sysctl.d/20-sysctl.conf'
   with_items:
     - '{{ elastic_kernel_parameters }}'
 
@@ -37,6 +37,7 @@
   with_items:
     - { regexp: '^-Xms', line: '-Xms{{ elastic_heap_size }}' }
     - { regexp: '^-Xmx', line: '-Xmx{{ elastic_heap_size }}' }
+    - { regexp: '^-Djava.io.tmpdir', line: '-Djava.io.tmpdir={{ elastic_tmpdir }}' }
   register: es_jvm
 
 - name: Elasticsearch system configuration
@@ -46,10 +47,20 @@
     regexp: '{{ item.regexp }}'
     line: '{{ item.line }}'
   with_items:
-    - { regexp: '^MAX_OPEN_FILES', line: 'MAX_OPEN_FILES=65535' }
+    - { regexp: '^MAX_OPEN_FILES', line: 'MAX_OPEN_FILES=1048576' }
     - { regexp: '^MAX_LOCKED_MEMORY', line: 'MAX_LOCKED_MEMORY=unlimited' }
     - { regexp: '^MAX_MAP_COUNT', line: 'MAX_MAP_COUNT=262144' }
   register: es_sysconfig
+
+- name: Elasticsearch systemd configuration
+  lineinfile:
+    state: 'present'
+    dest: '/lib/systemd/system/elasticsearch.service'
+    regexp: '{{ item.regexp }}'
+    line: '{{ item.line }}'
+  with_items:
+    - { regexp: '^LimitNOFILE', line: 'LimitNOFILE=1048576' }
+  register: es_systemd
 
 - name: Elasticsearch PKI file transfer
   copy:
