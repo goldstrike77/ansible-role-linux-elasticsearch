@@ -14,4 +14,6 @@
     - '{{ elastic_port_rest }}'
     - '{{ elastic_port_transport }}'
     - '{{ elastic_port_exporter }}'
-  when: services_state.ansible_facts.services["firewalld.service"].state == 'running'
+  when:
+    - services_state.ansible_facts.services["firewalld.service"] is defined
+    - services_state.ansible_facts.services["firewalld.service"].state == 'running'
