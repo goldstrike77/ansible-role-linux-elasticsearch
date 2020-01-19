@@ -48,7 +48,7 @@
       when: elastic_auth | bool
     - name: Include prometheus exporter tasks
       include: 'exporter.yml'
-      when: exporter_is_install
+      when: exporter_is_install | bool
     - include_tasks: 'register.yml'
       when:
         - exporter_is_install | bool
