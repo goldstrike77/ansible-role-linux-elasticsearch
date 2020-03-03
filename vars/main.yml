@@ -14,6 +14,10 @@ elastic_kernel_parameters:
 
 elastic_exporter_collector:
 #  - 'es.all'
+  - 'es.cluster_settings'
   - 'es.indices'
+  - 'es.indices_settings'
+  - 'es.shards'
+  - 'es.snapshots'
 
 elastic_tmpdir: '/var/run/elasticsearch'
