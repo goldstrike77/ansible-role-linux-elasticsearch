@@ -65,7 +65,6 @@ http.port: {{ elastic_port_rest }}
 # Pass an initial list of hosts to perform discovery when new node is started:
 # The default list of hosts is ["127.0.0.1", "[::1]"]
 {% if elastic_version.split('.')[0] == '7' %}
-cluster.max_shards_per_node: 
 discovery.seed_hosts: ['{{ elastic_servers | list | join(":" + elastic_port_transport + "', '") }}:{{ elastic_port_transport }}']
 cluster.initial_master_nodes: ['{{ elastic_servers | list | join(":" + elastic_port_transport + "', '") }}:{{ elastic_port_transport }}']
 {% else %}
