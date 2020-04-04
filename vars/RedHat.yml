@@ -6,7 +6,7 @@ elastic_dependent_packages:
   - 'libselinux-utils'
   - 'policycoreutils-python'
 elastic_packages:
-  - 'elasticsearch-{{ elastic_version }}*'
+  - 'elasticsearch-{{ elastic_version }}-1'
 
 elastic_exporter_repo_name: 'prometheus'
 elastic_exporter_repo_url: "http://cache.omygods.com/prometheus-rpm/release/el/{{ansible_distribution_version.split('.')[0]}}/$basearch"
