@@ -26,7 +26,7 @@ __Table of Contents__
 - [Contributors](#Contributors)
 
 ## Overview
-This Ansible role installs Elasticsearch on linux operating system, including establishing a filesystem structure and server configuration with some common operational features.
+This Ansible role installs Elasticsearch on linux operating system, including establishing a filesystem structure and server configuration with some common operational features. Elasticsearch is a search engine based on the Lucene library. It provides a distributed, multitenant-capable full-text search engine with an HTTP web interface and schema-free JSON documents.
 
 ## Requirements
 ### Operating systems
