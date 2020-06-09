@@ -89,9 +89,14 @@ There are some variables in vars/main.yml:
 ### Hosts inventory file
 See tests/inventory for an example.
 
-    node01 ansible_host='192.168.1.10' elastic_cluster='syslog'
-    node02 ansible_host='192.168.1.11' elastic_cluster='syslog'
-    node03 ansible_host='192.168.1.12' elastic_cluster='syslog'
+    [syslog]
+    node01 ansible_host='192.168.1.10'
+    node02 ansible_host='192.168.1.11'
+    node03 ansible_host='192.168.1.12'
+
+    [syslog:vars]
+    elastic_cluster='syslog'
+    elastic_version='7.6.2'
 
 ### Vars in role configuration
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
@@ -105,7 +110,7 @@ Including an example of how to use your role (for instance, with variables passe
 You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: group_vars/all or host_vars/`group_name`
 
     elastic_cluster: 'syslog'
-    elastic_version: '6.8.10'
+    elastic_version: '7.6.2'
     elastic_path: '/data'
     elastic_auth: false
     elastic_pass: 'password'

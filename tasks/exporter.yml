@@ -19,9 +19,9 @@
   template:
     src: 'elasticsearch_exporter.default.j2'
     dest: '/etc/default/elasticsearch_exporter'
-    owner: 'root'
-    group: 'root'
-    mode: '0644'
+    owner: 'prometheus'
+    group: 'prometheus'
+    mode: '0640'
   register: conf_update
 
 - name: Prometheus elasticsearch exporter service is enabled
@@ -29,6 +29,5 @@
     name: 'elasticsearch_exporter.service'
     enabled: 'yes'
     state: 'restarted'
-    daemon_reload: yes
-  when:
-    - conf_update is changed
+    daemon_reload: 'yes'
+  when: conf_update is changed

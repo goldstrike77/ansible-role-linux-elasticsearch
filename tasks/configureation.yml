@@ -24,8 +24,8 @@
     dest: '/etc/elasticsearch/elasticsearch.yml'
     backup: 'yes'
     owner: 'root'
-    group: 'root'
-    mode: '0644'
+    group: 'elasticsearch'
+    mode: '0660'
   register: es_config
 
 - name: Elasticsearch JVM options configuration
@@ -70,5 +70,5 @@
     dest: '/etc/elasticsearch/ssl'
     owner: 'root'
     group: 'elasticsearch'
-    mode: '0644'
+    mode: '0660'
   register: es_pki
