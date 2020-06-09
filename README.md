@@ -50,7 +50,9 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `elastic_path`: Specify the Elasticsearch data directory.
 * `elastic_auth`: A boolean value, Enable or Disable authentication.
 * `elastic_pass`: Authorization password.
+* `elastic_https`: A boolean value, whether Encrypting HTTP client communications.
 * `elastic_heap_size`: Specify the maximum memory allocation pool for a Java virtual machine.
+* `elastic_memory_lock`: A boolean value, whether lock the process address space into memory on startup.
 * `elastic_node_type`: Type of nodes: default, master, data, ingest and coordinat.
 
 ##### Listen port
@@ -60,7 +62,6 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 
 ##### Server System Variables
 * `elastic_arg.action_destructive_requires_name`: Restricts deletions to specific names, instead of allowing the special _all or wildcard options.
-* `elastic_arg.bootstrap_memory_lock`: Lock the process address space into RAM.
 * `cluster_max_shards_per_node`: Controls the number of shards allowed in the cluster per data node.
 * `elastic_arg.http_compression`: Compression when possible with Accept-Encoding.
 * `elastic_arg.http_cors_enabled`: Enable or disable cross-origin resource sharing.
@@ -104,11 +105,13 @@ Including an example of how to use your role (for instance, with variables passe
 You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: group_vars/all or host_vars/`group_name`
 
     elastic_cluster: 'syslog'
-    elastic_version: '5.6.16'
+    elastic_version: '6.8.10'
     elastic_path: '/data'
     elastic_auth: false
     elastic_pass: 'password'
+    elastic_https: false
     elastic_heap_size: '3g'
+    elastic_memory_lock: false
     elastic_node_type: 'default'
     elastic_port_rest: '9200'
     elastic_port_transport: '9300-9400'
@@ -116,7 +119,6 @@ You can also use the group_vars or the host_vars files for setting the variables
     elastic_arg:
       action_destructive_requires_name: true
       cluster_max_shards_per_node: '3000'
-      bootstrap_memory_lock: false
       http_compression: true
       http_cors_enabled: true
       http_cors_allow_methods: 'HEAD, GET, POST, PUT, DELETE'

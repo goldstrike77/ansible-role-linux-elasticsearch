@@ -1,14 +1,15 @@
 ---
 - name: Waiting for Elasticsearch node ready
   uri:
-    url: 'http://127.0.0.1:{{ elastic_port_rest }}/_cluster/health'
+    url: '{% if elastic_auth | bool and elastic_https | bool %}https{% else %}http{% endif %}://{{ ansible_default_ipv4.address }}:{{ elastic_port_rest }}/_cluster/health'
     method: 'GET'
     user: 'elastic'
     password: 'changeme'
+    validate_certs: 'no'
     force_basic_auth: 'yes'
     return_content: 'yes'
   environment:
-    no_proxy: '127.0.0.1'
+    no_proxy: '{{ ansible_default_ipv4.address }}'
   register: es_node_status
   until: es_node_status.content.find("green") != -1
   retries: 24
@@ -16,16 +17,17 @@
 
 - name: Change Elasticsearch user password
   uri:
-    url: 'http://127.0.0.1:{{ elastic_port_rest }}/_xpack/security/user/{{ item }}/_password'
+    url: '{% if elastic_auth | bool and elastic_https | bool %}https{% else %}http{% endif %}://{{ ansible_default_ipv4.address }}:{{ elastic_port_rest }}/_xpack/security/user/{{ item }}/_password'
     method: 'POST'
     user: 'elastic'
     password: 'changeme'
+    validate_certs: 'no'
     body: '{"password": "{{ elastic_pass }}"}'
     body_format: 'json'
     force_basic_auth: 'yes'
   loop: '{{ elastic_xpack_builtin_user|flatten(levels=1) }}'
   environment:
-    no_proxy: '127.0.0.1'
+    no_proxy: '{{ ansible_default_ipv4.address }}'
   register: es_auth_status
   until: es_auth_status.status == 200
   retries: 3
@@ -36,15 +38,16 @@
 
 - name: Change Elasticsearch superuser password
   uri:
-    url: 'http://127.0.0.1:{{ elastic_port_rest }}/_xpack/security/user/elastic/_password'
+    url: '{% if elastic_auth | bool and elastic_https | bool %}https{% else %}http{% endif %}://{{ ansible_default_ipv4.address }}:{{ elastic_port_rest }}/_xpack/security/user/elastic/_password'
     method: 'POST'
     user: 'elastic'
     password: 'changeme'
+    validate_certs: 'no'
     body: '{"password": "{{ elastic_pass }}"}'
     body_format: 'json'
     force_basic_auth: 'yes'
   environment:
-    no_proxy: '127.0.0.1'
+    no_proxy: '{{ ansible_default_ipv4.address }}'
   register: es_auth_status
   until: es_auth_status.status == 200
   retries: 3

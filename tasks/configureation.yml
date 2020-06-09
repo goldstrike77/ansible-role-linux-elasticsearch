@@ -58,8 +58,10 @@
     dest: '/lib/systemd/system/elasticsearch.service'
     regexp: '{{ item.regexp }}'
     line: '{{ item.line }}'
+    insertafter: '\[Service\]'
   with_items:
-    - { regexp: '^LimitNOFILE', line: 'LimitNOFILE=1048576' }
+    - { regexp: '^LimitNOFILE',  line: 'LimitNOFILE=1048576' }
+    - { regexp: '^LimitMEMLOCK', line: 'LimitMEMLOCK=infinity' }
   register: es_systemd
 
 - name: Elasticsearch PKI file transfer

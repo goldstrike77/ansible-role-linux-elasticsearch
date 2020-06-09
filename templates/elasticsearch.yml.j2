@@ -40,7 +40,7 @@ path.logs: /var/log/elasticsearch
 #
 # Lock the memory on startup:
 #
-bootstrap.memory_lock: {{ elastic_arg.bootstrap_memory_lock | bool | to_json }}
+bootstrap.memory_lock: {{ elastic_memory_lock | bool | to_json }}
 #
 # Make sure that the heap size is set to about half the memory available
 # on the system and that the owner of the process is allowed to use this
@@ -52,7 +52,7 @@ bootstrap.memory_lock: {{ elastic_arg.bootstrap_memory_lock | bool | to_json }}
 #
 # Set the bind address to a specific IP (IPv4 or IPv6):
 #
-network.host: 0.0.0.0
+network.host: {{ ansible_default_ipv4.address }}
 #
 # Set a custom port for HTTP:
 #
@@ -95,15 +95,22 @@ action.destructive_requires_name: {{ elastic_arg.action_destructive_requires_nam
 http.compression: {{ elastic_arg.http_compression | bool | to_json }}
 http.cors.enabled: {{ elastic_arg.http_cors_enabled | bool | to_json }}
 http.cors.allow-methods: {{ elastic_arg.http_cors_allow_methods }}
-{% if elastic_auth %}
+{% if elastic_auth | bool %}
 xpack.security.audit.enabled: true
 xpack.security.enabled: true
+xpack.security.http.ssl.enabled: {{ elastic_https | bool | to_json }}
+xpack.security.http.ssl.supported_protocols: TLSv1.2
+xpack.security.http.ssl.client_authentication: none
+xpack.security.http.ssl.key: /etc/elasticsearch/ssl/server.key
+xpack.security.http.ssl.certificate: /etc/elasticsearch/ssl/server.crt
+xpack.security.http.ssl.certificate_authorities: /etc/elasticsearch/ssl/ca-cert.pem
 xpack.security.transport.ssl.enabled: true
 xpack.security.transport.ssl.supported_protocols: TLSv1.2
 xpack.security.transport.ssl.client_authentication: none
 xpack.security.transport.ssl.verification_mode: none
 xpack.security.transport.ssl.key: /etc/elasticsearch/ssl/server.key
-xpack.security.transport.ssl.certificate: /etc/elasticsearch/ssl/certificate.pem
+xpack.security.transport.ssl.certificate: /etc/elasticsearch/ssl/server.crt
+xpack.security.transport.ssl.certificate_authorities: /etc/elasticsearch/ssl/ca-cert.pem
 {% endif %}
 {% if elastic_node_type == 'coordinat' %}
 node.master: false

@@ -2,11 +2,13 @@
 # General parameters #
 elastic_is_install: false # A boolean value, whether install the ElasticSearch.
 elastic_cluster: 'default' # Specify name for your cluster name.
-elastic_version: '5.6.16' # Specify the Elasticsearch version.
+elastic_version: '6.8.10' # Specify the Elasticsearch version.
 elastic_path: '/data' # Specify the Elasticsearch data directory.
 elastic_auth: false # A boolean value, Enable or Disable authentication.
 elastic_pass: 'changeme' # Authorization user password.
+elastic_https: false # A boolean value, whether Encrypting HTTP client communications.
 elastic_heap_size: '3g' # Specify the maximum memory allocation pool for a Java virtual machine.
+elastic_memory_lock: false # A boolean value, whether lock the process address space into memory on startup.
 elastic_node_type: 'default' # Type of nodes: default, master, data, ingest and coordinat.
 
 # Listen port #
@@ -17,7 +19,6 @@ elastic_port_exporter: '9108' # Prometheus Elasticsearch Exporter.
 # Server System Variables #
 elastic_arg:
   action_destructive_requires_name: true # Restricts deletions to specific names, instead of allowing the special _all or wildcard options.
-  bootstrap_memory_lock: false # Lock the process address space into RAM.
   cluster_max_shards_per_node: '10000' # Controls the number of shards allowed in the cluster per data node.
   http_compression: true # Compression when possible with Accept-Encoding.
   http_cors_enabled: true # Enable or disable cross-origin resource sharing.
