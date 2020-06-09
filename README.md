@@ -62,7 +62,7 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 
 ##### Server System Variables
 * `elastic_arg.action_destructive_requires_name`: Restricts deletions to specific names, instead of allowing the special _all or wildcard options.
-* `cluster_max_shards_per_node`: Controls the number of shards allowed in the cluster per data node.
+* `elastic_arg.cluster_max_shards_per_node`: Controls the number of shards allowed in the cluster per data node.
 * `elastic_arg.http_compression`: Compression when possible with Accept-Encoding.
 * `elastic_arg.http_cors_enabled`: Enable or disable cross-origin resource sharing.
 * `elastic_arg.http_cors_allow_methods`: Which methods to allow.
@@ -114,11 +114,11 @@ You can also use the group_vars or the host_vars files for setting the variables
     elastic_memory_lock: false
     elastic_node_type: 'default'
     elastic_port_rest: '9200'
-    elastic_port_transport: '9300-9400'
+    elastic_port_transport: '9300'
     elastic_port_exporter: '9108'
     elastic_arg:
       action_destructive_requires_name: true
-      cluster_max_shards_per_node: '3000'
+      cluster_max_shards_per_node: '10000'
       http_compression: true
       http_cors_enabled: true
       http_cors_allow_methods: 'HEAD, GET, POST, PUT, DELETE'
