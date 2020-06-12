@@ -29,9 +29,7 @@
       include: 'configureation.yml'
     - name: Include certificate tasks
       include: 'certificates.yml'
-      when:
-        - elastic_https | bool
-        - elastic_auth | bool
+      when: elastic_auth | bool
     - name: Install x-pack plugins
       include: 'xpack.yml'
       when:
