@@ -27,6 +27,11 @@
       include: 'firewall.yml'
     - name: Configuration the elasticsearch
       include: 'configureation.yml'
+    - name: Include certificate tasks
+      include: 'certificates.yml'
+      when:
+        - elastic_https | bool
+        - elastic_auth | bool
     - name: Install x-pack plugins
       include: 'xpack.yml'
       when:
@@ -40,7 +45,7 @@
     - name: Reload the Elasticsearch service
       shell: echo ''
       notify: 'Ensure Elasticsearch service is enabled'
-      when: es_update is changed or es_config is changed or es_xpack_state is changed or es_jvm is changed or es_sysconfig is changed es_pki is changed or es_systemd is changed
+      when: es_update is changed or es_config is changed or es_xpack_state is changed or es_jvm is changed or es_sysconfig is changed or es_systemd is changed
     - name: Force the handler to run immediately
       meta: flush_handlers
     - name: Include authentication tasks

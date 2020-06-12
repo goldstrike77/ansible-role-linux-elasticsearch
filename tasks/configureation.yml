@@ -63,12 +63,3 @@
     - { regexp: '^LimitNOFILE',  line: 'LimitNOFILE=1048576' }
     - { regexp: '^LimitMEMLOCK', line: 'LimitMEMLOCK=infinity' }
   register: es_systemd
-
-- name: Elasticsearch PKI file transfer
-  copy:
-    src: 'ssl/'
-    dest: '/etc/elasticsearch/ssl'
-    owner: 'root'
-    group: 'elasticsearch'
-    mode: '0660'
-  register: es_pki

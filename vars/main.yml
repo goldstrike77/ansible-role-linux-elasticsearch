@@ -21,3 +21,11 @@ elastic_exporter_collector:
   - 'es.snapshots'
 
 elastic_tmpdir: '/var/run/elasticsearch'
+
+elastic_cert_path: '/etc/elasticsearch/ssl'
+
+elastic_pypi_url: 'pypi.tuna.tsinghua.edu.cn'
+
+elastic_python_dependent_packages:
+  - 'pip'
+  - 'cryptography'

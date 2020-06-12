@@ -1,0 +1,76 @@
+---
+- name: Install requirement python package.
+  pip:
+    name: '{{ elastic_python_dependent_packages }}'
+    state: 'forcereinstall'
+    extra_args: '--default-timeout=120 --ignore-installed -i https://{{ elastic_pypi_url }}/simple --trusted-host {{ elastic_pypi_url }}'
+  register: elastic_python_status
+  until: elastic_python_status is succeeded
+  retries: 5
+  delay: 2
+
+- name: Check private key exists.
+  stat:
+    path: '{{ elastic_cert_path }}/server.key'
+  register: check_cert_keys
+
+- name: Certificate Signing operation.
+  block:
+    - name: Creating Certificate folder.
+      file:
+        dest: '{{ elastic_cert_path }}'
+        state: 'directory'
+        owner: 'elasticsearch'
+        mode: '1750'
+    - name: Selfsigned CA file transfer.
+      copy:
+        src: 'ssl/{{ item }}'
+        dest: '{{ elastic_cert_path }}/{{ item }}'
+        owner: 'elasticsearch'
+        mode: '640'
+      loop:
+        - 'ca-cert.pem'
+        - 'ca-key.pem'
+    - name: Import Selfsigned CA certificate to cacerts keystore.
+      java_cert:
+        cert_path: '{{ elastic_cert_path }}/ca-cert.pem'
+        cert_alias: 'default'
+        keystore_path: '/etc/pki/ca-trust/extracted/java/cacerts'
+        keystore_pass: 'changeit'
+        executable: '/bin/keytool'
+        state: 'present'
+    - name: Generate an OpenSSL private key.
+      openssl_privatekey:
+        path: '{{ elastic_cert_path }}/server.key'
+        select_crypto_backend: 'cryptography'
+        size: '2048'
+        type: 'RSA'
+        owner: 'root'
+        mode: '0644'
+        state: 'present'
+    - name: Generate an OpenSSL Certificate Signing Request.
+      openssl_csr:
+        path: '{{ elastic_cert_path }}/server.csr'
+        privatekey_path: '{{ elastic_cert_path }}/server.key'
+        select_crypto_backend: 'cryptography'
+        common_name: 'Server'
+        subject_alt_name:
+          - 'DNS:{{ ansible_hostname }}'
+          - 'DNS:{{ ansible_fqdn }}'
+          - 'IP:{{ ansible_default_ipv4.address }}'
+        owner: 'root'
+        mode: '0644'
+        state: 'present'
+    - name: Generate an OpenSSL certificate signed with your own CA certificate.
+      openssl_certificate:
+        path: '{{ elastic_cert_path }}/server.crt'
+        csr_path: '{{ elastic_cert_path }}/server.csr'
+        ownca_path: '{{ elastic_cert_path }}/ca-cert.pem'
+        ownca_privatekey_path: '{{ elastic_cert_path }}/ca-key.pem'
+        select_crypto_backend: 'cryptography'
+        ownca_not_after: '+7305d'
+        provider: 'ownca'
+        owner: 'root'
+        mode: '0644'
+        state: 'present'
+  when: not check_cert_keys.stat.exists or check_cert_keys.stat.size == 0
