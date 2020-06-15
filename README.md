@@ -26,11 +26,11 @@ __Table of Contents__
 - [Contributors](#Contributors)
 
 ## Overview
-This Ansible role installs Elasticsearch on linux operating system, including establishing a filesystem structure and server configuration with some common operational features. Elasticsearch is a search engine based on the Lucene library. It provides a distributed, multitenant-capable full-text search engine with an HTTP web interface and schema-free JSON documents.
+Elasticsearch is the living heart of what is today’s the most popular log analytics platform — the ELK Stack (Elasticsearch, Logstash and Kibana). Elasticsearch’s role is so central that it has become synonymous with the name of the stack itself. Elasticsearch is a search engine based on the Lucene library. It provides a distributed, multitenant-capable full-text search engine with an HTTP web interface and schema-free JSON documents. Completely open source and built with Java, Elasticsearch is a NoSQL database. That means it stores data in an unstructured way and that you cannot use SQL to query it. In the context of data analysis, Elasticsearch is used together with the other components in the ELK Stack, Logstash and Kibana, and plays the role of data indexing and storage.
 
 ## Requirements
 ### Operating systems
-This role will work on the following operating systems:
+This Ansible role installs Elasticsearch on linux operating system, including establishing a filesystem structure and server configuration with some common operational features.  This role will work on the following operating systems:
 
   * CentOS 7
 
@@ -101,46 +101,50 @@ See tests/inventory for an example.
 ### Vars in role configuration
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
+```yaml
     - hosts: all
       roles:
          - role: ansible-role-linux-elasticsearch
            elastic_cluster: 'syslog'
+```
 
 ### Combination of group vars and playbook
 You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: group_vars/all or host_vars/`group_name`
 
-    elastic_cluster: 'syslog'
-    elastic_version: '7.6.2'
-    elastic_path: '/data'
-    elastic_auth: false
-    elastic_pass: 'password'
-    elastic_https: false
-    elastic_heap_size: '3g'
-    elastic_memory_lock: false
-    elastic_node_type: 'default'
-    elastic_port_rest: '9200'
-    elastic_port_transport: '9300'
-    elastic_port_exporter: '9108'
-    elastic_arg:
-      action_destructive_requires_name: true
-      cluster_max_shards_per_node: '10000'
-      http_compression: true
-      http_cors_enabled: true
-      http_cors_allow_methods: 'HEAD, GET, POST, PUT, DELETE'
-    environments: 'Development'
-    tags:
-      subscription: 'default'
-      owner: 'nobody'
-      department: 'Infrastructure'
-      organization: 'The Company'
-      region: 'IDC01'
-    exporter_is_install: false
-    consul_public_register: false
-    consul_public_exporter_token: '00000000-0000-0000-0000-000000000000'
-    consul_public_http_prot: 'https'
-    consul_public_http_port: '8500'
-    consul_public_clients:
-      - '127.0.0.1'
+```yaml
+elastic_cluster: 'syslog'
+elastic_version: '7.6.2'
+elastic_path: '/data'
+elastic_auth: false
+elastic_pass: 'password'
+elastic_https: false
+elastic_heap_size: '3g'
+elastic_memory_lock: false
+elastic_node_type: 'default'
+elastic_port_rest: '9200'
+elastic_port_transport: '9300'
+elastic_port_exporter: '9108'
+elastic_arg:
+  action_destructive_requires_name: true
+  cluster_max_shards_per_node: '10000'
+  http_compression: true
+  http_cors_enabled: true
+  http_cors_allow_methods: 'HEAD, GET, POST, PUT, DELETE'
+environments: 'Development'
+tags:
+  subscription: 'default'
+  owner: 'nobody'
+  department: 'Infrastructure'
+  organization: 'The Company'
+  region: 'IDC01'
+exporter_is_install: false
+consul_public_register: false
+consul_public_exporter_token: '00000000-0000-0000-0000-000000000000'
+consul_public_http_prot: 'https'
+consul_public_http_port: '8500'
+consul_public_clients:
+  - '127.0.0.1'
+```
 
 ## License
 ![](https://img.shields.io/badge/MIT-purple.svg?style=for-the-badge)
