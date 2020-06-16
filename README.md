@@ -102,10 +102,10 @@ See tests/inventory for an example.
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
 ```yaml
-    - hosts: all
-      roles:
-         - role: ansible-role-linux-elasticsearch
-           elastic_cluster: 'syslog'
+- hosts: all
+  roles:
+     - role: ansible-role-linux-elasticsearch
+       elastic_cluster: 'syslog'
 ```
 
 ### Combination of group vars and playbook

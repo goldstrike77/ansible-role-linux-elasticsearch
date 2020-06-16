@@ -62,4 +62,6 @@
   with_items:
     - { regexp: '^LimitNOFILE',  line: 'LimitNOFILE=1048576' }
     - { regexp: '^LimitMEMLOCK', line: 'LimitMEMLOCK=infinity' }
+    - { regexp: '^Restart',      line: 'Restart=on-failure' }
+    - { regexp: '^RestartSec',   line: 'RestartSec=30s' }
   register: es_systemd
