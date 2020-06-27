@@ -30,7 +30,7 @@ Elasticsearch is the living heart of what is today’s the most popular log anal
 
 ## Requirements
 ### Operating systems
-This Ansible role installs Elasticsearch on linux operating system, including establishing a filesystem structure and server configuration with some common operational features.  This role will work on the following operating systems:
+This Ansible role installs Elasticsearch on Linux operating system, including establishing a filesystem structure and server configuration with some common operational features, Will works on the following operating systems:
 
   * CentOS 7
 
@@ -96,7 +96,7 @@ See tests/inventory for an example.
 
     [syslog:vars]
     elastic_cluster='syslog'
-    elastic_version='7.6.2'
+    elastic_version='7.7.1'
 
 ### Vars in role configuration
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
@@ -109,15 +109,15 @@ Including an example of how to use your role (for instance, with variables passe
 ```
 
 ### Combination of group vars and playbook
-You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: group_vars/all or host_vars/`group_name`
+You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: group_vars/all or host_vars/`group_name`.
 
 ```yaml
 elastic_cluster: 'syslog'
-elastic_version: '7.6.2'
+elastic_version: '7.7.1'
 elastic_path: '/data'
-elastic_auth: false
-elastic_pass: 'password'
-elastic_https: false
+elastic_auth: true
+elastic_pass: 'changeme'
+elastic_https: true
 elastic_heap_size: '3g'
 elastic_memory_lock: false
 elastic_node_type: 'default'
