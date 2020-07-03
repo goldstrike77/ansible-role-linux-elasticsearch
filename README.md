@@ -69,6 +69,8 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 
 ##### Service Mesh
 * `environments`: Define the service environment.
+* `datacenter`: Define the DataCenter.
+* `domain`: Define the Domain.
 * `tags`: Define the service custom label.
 * `exporter_is_install`: Whether to install prometheus exporter.
 * `consul_public_register`: Whether register a exporter service with public consul client.
@@ -131,12 +133,14 @@ elastic_arg:
   http_cors_enabled: true
   http_cors_allow_methods: 'HEAD, GET, POST, PUT, DELETE'
 environments: 'Development'
+datacenter: 'dc01'
+domain: 'local'
 tags:
   subscription: 'default'
   owner: 'nobody'
   department: 'Infrastructure'
   organization: 'The Company'
-  region: 'IDC01'
+  region: 'China'
 exporter_is_install: false
 consul_public_register: false
 consul_public_exporter_token: '00000000-0000-0000-0000-000000000000'
