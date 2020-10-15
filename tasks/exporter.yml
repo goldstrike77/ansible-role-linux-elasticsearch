@@ -1,4 +1,7 @@
 ---
+- name: Include OS-specific variables
+  include_vars: '{{ ansible_os_family }}.yml'
+
 - name: Add Prometheus elasticsearch exporter YUM repositories
   yum_repository:
     name: '{{ elastic_exporter_repo_name }}'

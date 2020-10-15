@@ -21,8 +21,6 @@
   block:
     - name: Include tasks for specific OS
       include: '{{ ansible_os_family }}.yml'
-    - name: Straight to getenforce selinux status
-      include: 'selinux.yml'
     - name: Include firewall tasks
       include: 'firewall.yml'
     - name: Configuration the elasticsearch
@@ -49,12 +47,14 @@
     - name: Include authentication tasks
       include: 'authentication.yml'
       when: elastic_auth | bool
-    - name: Include prometheus exporter tasks
-      include: 'exporter.yml'
-      when: exporter_is_install | bool
-    - include_tasks: 'register.yml'
-      when:
-        - exporter_is_install | bool
-        - consul_public_register | bool
   when:
     - not result.stat.exists
+
+- name: Include prometheus exporter tasks
+  include: 'exporter.yml'
+  when: exporter_is_install | bool
+
+- include_tasks: 'register.yml'
+  when:
+    - exporter_is_install | bool
+    - consul_public_register | bool
