@@ -17,6 +17,10 @@
     state: 'present'
     validate_certs: 'no'
     disable_gpg_check: 'yes'
+  register: yum_status
+  until: yum_status is succeeded
+  retries: 5
+  delay: 2
 
 - name: Prometheus elasticsearch exporter configure file transfer
   template:
