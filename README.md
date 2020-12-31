@@ -71,6 +71,7 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `environments`: Define the service environment.
 * `datacenter`: Define the DataCenter.
 * `domain`: Define the Domain.
+* `customer`: Define the customer name.
 * `tags`: Define the service custom label.
 * `exporter_is_install`: Whether to install prometheus exporter.
 * `consul_public_register`: Whether register a exporter service with public consul client.
@@ -98,7 +99,7 @@ See tests/inventory for an example.
 
     [syslog:vars]
     elastic_cluster='syslog'
-    elastic_version='7.7.1'
+    elastic_version='7.9.3'
 
 ### Vars in role configuration
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
@@ -115,7 +116,7 @@ You can also use the group_vars or the host_vars files for setting the variables
 
 ```yaml
 elastic_cluster: 'syslog'
-elastic_version: '7.7.1'
+elastic_version: '7.9.3'
 elastic_path: '/data'
 elastic_auth: true
 elastic_pass: 'changeme'
@@ -132,9 +133,10 @@ elastic_arg:
   http_compression: true
   http_cors_enabled: true
   http_cors_allow_methods: 'HEAD, GET, POST, PUT, DELETE'
-environments: 'Development'
+environments: 'prd'
 datacenter: 'dc01'
 domain: 'local'
+customer: 'demo'
 tags:
   subscription: 'default'
   owner: 'nobody'

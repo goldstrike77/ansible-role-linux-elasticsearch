@@ -2,7 +2,7 @@
 # General parameters #
 elastic_is_install: false # A boolean value, whether install the ElasticSearch.
 elastic_cluster: 'default' # Specify name for your cluster name.
-elastic_version: '7.7.1' # Specify the Elasticsearch version.
+elastic_version: '7.9.3' # Specify the Elasticsearch version.
 elastic_path: '/data' # Specify the Elasticsearch data directory.
 elastic_auth: true # A boolean value, Enable or Disable authentication.
 elastic_pass: 'changeme' # Authorization user password.
@@ -25,9 +25,10 @@ elastic_arg:
   http_cors_allow_methods: 'HEAD, GET, POST, PUT, DELETE' # Which methods to allow.
 
 # Service Mesh #
-environments: 'Development' # Define the service environment.
+environments: 'prd' # Define the service environment.
 datacenter: 'dc01' # Define the DataCenter.
 domain: 'local' # Define the Domain.
+customer: 'demo' # Define the customer name.
 #tags: # Define the service custom label.
 #  subscription: 'default'
 #  owner: 'nobody'
