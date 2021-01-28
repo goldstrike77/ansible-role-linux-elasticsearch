@@ -27,5 +27,5 @@ elastic_cert_path: '/etc/elasticsearch/ssl'
 elastic_pypi_url: 'pypi.tuna.tsinghua.edu.cn'
 
 elastic_python_dependent_packages:
-  - 'pip'
+  - 'pip==20.3.4'
   - 'cryptography'
