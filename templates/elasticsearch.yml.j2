@@ -20,7 +20,7 @@ cluster.name: {{ elastic_cluster | upper }}
 #
 # Use a descriptive name for the node:
 #
-node.name: {{ ansible_hostname | upper }}
+node.name: {{ ansible_hostname | lower }}
 #
 # Add custom attributes to the node:
 #
