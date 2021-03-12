@@ -1,5 +1,5 @@
 ---
-- name: Include OS-specific variables
+- name: Include OS-specific variables.
   include_vars: '{{ ansible_os_family }}.yml'
 
 - name: 'Add Elasticsearch {{ elastic_version.split(".")[0] }} YUM repositories'
@@ -11,18 +11,20 @@
     gpgcheck: 'no'
     timeout: '60'
 
-- name: Install the Elasticsearch dependents packages
+- name: Install the Elasticsearch dependents packages.
   yum:
-    name: '{{ elastic_dependent_packages }}'
+    name: '{{ item.package }}'
     state: 'present'
     validate_certs: 'no'
     disable_gpg_check: 'yes'
+  loop: '{{ elastic_dependent_packages }}'
+  when: item.create | default(true) | bool
   register: yum_status
   until: yum_status is succeeded
   retries: 5
   delay: 2
 
-- name: Install the Elasticsearch packages
+- name: Install the Elasticsearch packages.
   yum:
     name: '{{ elastic_packages }}'
     state: 'present'

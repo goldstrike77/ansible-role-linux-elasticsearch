@@ -31,14 +31,14 @@
       loop:
         - 'ca-cert.pem'
         - 'ca-key.pem'
-    - name: Import Selfsigned CA certificate to cacerts keystore.
-      java_cert:
-        cert_path: '{{ elastic_cert_path }}/ca-cert.pem'
-        cert_alias: 'default'
-        keystore_path: '/etc/pki/ca-trust/extracted/java/cacerts'
-        keystore_pass: 'changeit'
-        executable: '/bin/keytool'
-        state: 'present'
+#    - name: Import Selfsigned CA certificate to cacerts keystore.
+#      java_cert:
+#        cert_path: '{{ elastic_cert_path }}/ca-cert.pem'
+#        cert_alias: 'default'
+#        keystore_path: '/etc/pki/ca-trust/extracted/java/cacerts'
+#        keystore_pass: 'changeit'
+#        executable: '/bin/keytool'
+#        state: 'present'
     - name: Generate an OpenSSL private key.
       openssl_privatekey:
         path: '{{ elastic_cert_path }}/server.key'

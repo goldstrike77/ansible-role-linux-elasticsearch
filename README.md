@@ -24,6 +24,7 @@ __Table of Contents__
 - [License](#license)
 - [Author Information](#author-information)
 - [Contributors](#Contributors)
+- [Donations](#Donations)
 
 ## Overview
 Elasticsearch is the living heart of what is today’s the most popular log analytics platform — the ELK Stack (Elasticsearch, Logstash and Kibana). Elasticsearch’s role is so central that it has become synonymous with the name of the stack itself. Elasticsearch is a search engine based on the Lucene library. It provides a distributed, multitenant-capable full-text search engine with an HTTP web interface and schema-free JSON documents. Completely open source and built with Java, Elasticsearch is a NoSQL database. That means it stores data in an unstructured way and that you cannot use SQL to query it. In the context of data analysis, Elasticsearch is used together with the other components in the ELK Stack, Logstash and Kibana, and plays the role of data indexing and storage.
@@ -98,8 +99,8 @@ See tests/inventory for an example.
     node03 ansible_host='192.168.1.12'
 
     [syslog:vars]
-    elastic_cluster='syslog'
-    elastic_version='7.9.3'
+    elastic_cluster='siem'
+    elastic_version='7.10.2'
 
 ### Vars in role configuration
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
@@ -108,20 +109,20 @@ Including an example of how to use your role (for instance, with variables passe
 - hosts: all
   roles:
      - role: ansible-role-linux-elasticsearch
-       elastic_cluster: 'syslog'
+       elastic_cluster: 'siem'
 ```
 
 ### Combination of group vars and playbook
 You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: group_vars/all or host_vars/`group_name`.
 
 ```yaml
-elastic_cluster: 'syslog'
-elastic_version: '7.9.3'
+elastic_cluster: 'siem'
+elastic_version: '7.10.2'
 elastic_path: '/data'
 elastic_auth: true
 elastic_pass: 'changeme'
 elastic_https: true
-elastic_heap_size: '3g'
+elastic_heap_size: 4g'
 elastic_memory_lock: false
 elastic_node_type: 'default'
 elastic_port_rest: '9200'
@@ -160,3 +161,8 @@ Please send your suggestions to make this role better.
 
 ## Contributors
 Special thanks to the [Connext Information Technology](http://www.connext.com.cn) for their contributions to this role.
+
+## Donations
+Please donate to the following monero address.
+
+    46CHVMbb6wQV2PJYEbahb353SYGqXhcdFQVEWdCnHb6JaR5125h3kNQ6bcqLye5G7UF7qz6xL9qHLDSAY3baagfmLZABz75
