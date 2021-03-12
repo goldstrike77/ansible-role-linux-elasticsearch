@@ -5,7 +5,7 @@ elastic_dependent_packages:
   - { package: 'python-pip' }
   - { package: 'libselinux-utils' }
   - { package: 'policycoreutils-python' }
-  - { package: 'java-1.8.0-openjdk-headless', create: '{{ logstash_version.split(".")[0] != "6" }}' }
+  - { package: 'java-1.8.0-openjdk-headless', create: '{{ elastic_version.split(".")[0] == "6" }}' }
 
 elastic_packages:
   - 'elasticsearch-{{ elastic_version }}-1'
