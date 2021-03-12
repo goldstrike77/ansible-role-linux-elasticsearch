@@ -39,7 +39,7 @@ This Ansible role installs Elasticsearch on Linux operating system, including es
 
 The following list of supported the Elasticsearch releases:
 
-* Elasticsearch 5.6+, 6.8+, 7.1+
+* Elasticsearch 6.8+, 7.1+
 
 ## Role variables
 ### Main parameters #
