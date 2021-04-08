@@ -100,12 +100,14 @@ xpack.security.audit.enabled: true
 xpack.security.enabled: true
 xpack.security.http.ssl.enabled: {{ elastic_https | bool | to_json }}
 xpack.security.http.ssl.supported_protocols: TLSv1.2
+xpack.security.http.ssl.cipher_suites: ["TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256","TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256","TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA","TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA","TLS_RSA_WITH_AES_128_CBC_SHA256","TLS_RSA_WITH_AES_128_CBC_SHA","TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384","TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384","TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA","TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA","TLS_RSA_WITH_AES_256_CBC_SHA256","TLS_RSA_WITH_AES_256_CBC_SHA"]
 xpack.security.http.ssl.client_authentication: none
 xpack.security.http.ssl.key: /etc/elasticsearch/ssl/server.key
 xpack.security.http.ssl.certificate: /etc/elasticsearch/ssl/server.crt
 xpack.security.http.ssl.certificate_authorities: /etc/elasticsearch/ssl/ca-cert.pem
 xpack.security.transport.ssl.enabled: true
 xpack.security.transport.ssl.supported_protocols: TLSv1.2
+xpack.security.transport.ssl.cipher_suites: ["TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256","TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256","TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA","TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA","TLS_RSA_WITH_AES_128_CBC_SHA256","TLS_RSA_WITH_AES_128_CBC_SHA","TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384","TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384","TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA","TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA","TLS_RSA_WITH_AES_256_CBC_SHA256","TLS_RSA_WITH_AES_256_CBC_SHA"]
 xpack.security.transport.ssl.client_authentication: none
 xpack.security.transport.ssl.verification_mode: none
 xpack.security.transport.ssl.key: /etc/elasticsearch/ssl/server.key

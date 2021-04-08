@@ -100,7 +100,7 @@ See tests/inventory for an example.
 
     [syslog:vars]
     elastic_cluster='siem'
-    elastic_version='7.10.2'
+    elastic_version='7.11.2'
 
 ### Vars in role configuration
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
@@ -117,7 +117,7 @@ You can also use the group_vars or the host_vars files for setting the variables
 
 ```yaml
 elastic_cluster: 'siem'
-elastic_version: '7.10.2'
+elastic_version: '7.11.2'
 elastic_path: '/data'
 elastic_auth: true
 elastic_pass: 'changeme'
