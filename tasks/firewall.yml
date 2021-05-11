@@ -1,16 +1,16 @@
 ---
-- name: Gathering service facts
+- name: Gathering service facts.
   service_facts:
   register: services_state
 
-- name: Allow Elasticsearch service port
+- name: Allow Elasticsearch service port.
   firewalld:
     port: '{{ item }}/tcp'
     zone: 'public'
     permanent: 'true'
     immediate: 'true'
     state: 'enabled'
-  with_items:
+  loop:
     - '{{ elastic_port_rest }}'
     - '{{ elastic_port_transport }}'
     - '{{ elastic_port_exporter }}'

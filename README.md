@@ -49,11 +49,11 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `elastic_cluster`: Specify name for your cluster name.
 * `elastic_version`: Specify the Elasticsearch version.
 * `elastic_path`: Specify the Elasticsearch data directory.
-* `elastic_auth`: A boolean value, Enable or Disable authentication.
+* `elastic_auth`: A boolean to determine whether or not enable authentication.
 * `elastic_pass`: Authorization password.
-* `elastic_https`: A boolean value, whether Encrypting HTTP client communications.
+* `elastic_https`: A boolean to determine whether or not Encrypting HTTP client communications.
 * `elastic_heap_size`: Specify the maximum memory allocation pool for a Java virtual machine.
-* `elastic_memory_lock`: A boolean value, whether lock the process address space into memory on startup.
+* `elastic_memory_lock`: A boolean to determine whether or not lock the process address space into memory on startup.
 * `elastic_node_type`: Type of nodes: default, master, data, ingest and coordinat.
 
 ##### Listen port

@@ -7,7 +7,7 @@
     group: 'elasticsearch'
     mode: '0750'
 
-- name: Configure kernel parameters
+- name: Configure kernel parameters.
   sysctl:
     name: '{{ item.variable }}'
     value: '{{ item.value }}'
@@ -15,10 +15,9 @@
     reload: 'yes'
     sysctl_set: 'yes'
     sysctl_file: '/etc/sysctl.d/20-sysctl.conf'
-  with_items:
-    - '{{ elastic_kernel_parameters }}'
+  loop: '{{ elastic_kernel_parameters }}'
 
-- name: Elasticsearch Configure file transfer
+- name: Elasticsearch Configure file transfer.
   template:
     src: 'elasticsearch.yml.j2'
     dest: '/etc/elasticsearch/elasticsearch.yml'
@@ -26,42 +25,42 @@
     owner: 'root'
     group: 'elasticsearch'
     mode: '0660'
-  register: es_config
+  notify: 'Ensure Elasticsearch service is enabled.'
 
-- name: Elasticsearch JVM options configuration
+- name: Elasticsearch JVM options configuration.
   lineinfile:
     state: present
     dest: '/etc/elasticsearch/jvm.options'
     regexp: '{{ item.regexp }}'
     line: '{{ item.line }}'
-  with_items:
+  loop:
     - { regexp: '^-Xms', line: '-Xms{{ elastic_heap_size }}' }
     - { regexp: '^-Xmx', line: '-Xmx{{ elastic_heap_size }}' }
     - { regexp: '^-Djava.io.tmpdir', line: '-Djava.io.tmpdir={{ elastic_tmpdir }}' }
-  register: es_jvm
+  notify: 'Ensure Elasticsearch service is enabled.'
 
-- name: Elasticsearch system configuration
+- name: Elasticsearch system configuration.
   lineinfile:
     state: 'present'
     dest: '/etc/sysconfig/elasticsearch'
     regexp: '{{ item.regexp }}'
     line: '{{ item.line }}'
-  with_items:
+  loop:
     - { regexp: '^MAX_OPEN_FILES', line: 'MAX_OPEN_FILES=1048576' }
     - { regexp: '^MAX_LOCKED_MEMORY', line: 'MAX_LOCKED_MEMORY=unlimited' }
     - { regexp: '^MAX_MAP_COUNT', line: 'MAX_MAP_COUNT=262144' }
-  register: es_sysconfig
+  notify: 'Ensure Elasticsearch service is enabled.'
 
-- name: Elasticsearch systemd configuration
+- name: Elasticsearch systemd configuration.
   lineinfile:
     state: 'present'
     dest: '/lib/systemd/system/elasticsearch.service'
     regexp: '{{ item.regexp }}'
     line: '{{ item.line }}'
     insertafter: '\[Service\]'
-  with_items:
+  loop:
     - { regexp: '^LimitNOFILE',  line: 'LimitNOFILE=1048576' }
     - { regexp: '^LimitMEMLOCK', line: 'LimitMEMLOCK=infinity' }
     - { regexp: '^Restart',      line: 'Restart=on-failure' }
     - { regexp: '^RestartSec',   line: 'RestartSec=30s' }
-  register: es_systemd
+  notify: 'Ensure Elasticsearch service is enabled.'

@@ -1,5 +1,8 @@
 ---
-- name: Gather Elastic node variables for cluster
+- name: Include OS-specific variables.
+  include_vars: '{{ ansible_os_family }}.yml'
+
+- name: Gather Elastic node variables for cluster.
   set_fact:
     elastic_servers: "\
       {% set _elastic_servers = [] %}\
@@ -12,49 +15,45 @@
       {{ _elastic_servers }}"
   when: elastic_servers is not defined or elastic_servers | length < 1
 
-- name: Check if Elasticsearch data exists
+- name: Check if Elasticsearch data exists.
   stat:
     path: '{{ elastic_path }}/elasticsearch/nodes'
   register: result
 
-- name: Elasticsearch operation
+- name: Elasticsearch operation.
   block:
-    - name: Include tasks for specific OS
+    - name: Include tasks for specific OS.
       include: '{{ ansible_os_family }}.yml'
-    - name: Include firewall tasks
+    - name: Include firewall tasks.
       include: 'firewall.yml'
-    - name: Configuration the elasticsearch
+    - name: Configuration the elasticsearch.
       include: 'configureation.yml'
-    - name: Include certificate tasks
+    - name: Include certificate tasks.
       include: 'certificates.yml'
       when: elastic_auth | bool
-    - name: Install x-pack plugins
+    - name: Install x-pack plugins.
       include: 'xpack.yml'
       when:
         - elastic_auth | bool
         - elastic_version.split('.')[0] == '5'
-    - name: Create Bootstrap password for elastic user
+    - name: Create Bootstrap password for elastic user.
       shell: "echo 'changeme' | /usr/share/elasticsearch/bin/elasticsearch-keystore add -x 'bootstrap.password'"
       when:
         - elastic_auth | bool
         - elastic_version.split('.')[0] != '5'
-    - name: Reload the Elasticsearch service
-      shell: echo ''
-      notify: 'Ensure Elasticsearch service is enabled'
-      when: es_update is changed or es_config is changed or es_xpack_state is changed or es_jvm is changed or es_sysconfig is changed or es_systemd is changed
-    - name: Force the handler to run immediately
+    - name: Force the handler to run immediately.
       meta: flush_handlers
-    - name: Include authentication tasks
+    - name: Include authentication tasks.
       include: 'authentication.yml'
       when: elastic_auth | bool
-  when:
-    - not result.stat.exists
+  when: not result.stat.exists
 
-- name: Include prometheus exporter tasks
+- name: Include prometheus exporter tasks.
   include: 'exporter.yml'
   when: exporter_is_install | bool
 
-- include_tasks: 'register.yml'
+- name: Registered with HashiCorp Consul.
+  include: 'register.yml'
   when:
     - exporter_is_install | bool
     - consul_public_register | bool

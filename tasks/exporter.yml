@@ -1,8 +1,5 @@
 ---
-- name: Include OS-specific variables
-  include_vars: '{{ ansible_os_family }}.yml'
-
-- name: Add Prometheus elasticsearch exporter YUM repositories
+- name: Add Prometheus elasticsearch exporter YUM repositories.
   yum_repository:
     name: '{{ elastic_exporter_repo_name }}'
     description: '{{ elastic_exporter_repo_name }} YUM repository'
@@ -11,7 +8,7 @@
     gpgcheck: 'no'
     timeout: '60'
 
-- name: Install the Prometheus elasticsearch exporter packages
+- name: Install the Prometheus elasticsearch exporter packages.
   yum:
     name: '{{ elastic_exporter_packages }}'
     state: 'present'
@@ -22,19 +19,11 @@
   retries: 5
   delay: 2
 
-- name: Prometheus elasticsearch exporter configure file transfer
+- name: Prometheus elasticsearch exporter configure file transfer.
   template:
     src: 'elasticsearch_exporter.default.j2'
     dest: '/etc/default/elasticsearch_exporter'
     owner: 'prometheus'
     group: 'prometheus'
     mode: '0640'
-  register: conf_update
-
-- name: Prometheus elasticsearch exporter service is enabled
-  systemd:
-    name: 'elasticsearch_exporter.service'
-    enabled: 'yes'
-    state: 'restarted'
-    daemon_reload: 'yes'
-  when: conf_update is changed
+  notify: 'Ensure Elasticsearch exporter service is enabled.'

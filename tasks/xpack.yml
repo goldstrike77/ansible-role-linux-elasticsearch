@@ -1,42 +1,39 @@
 ---
-- name: Check if x-pack plugin exists
+- name: Check if x-pack plugin exists.
   shell: '/usr/share/elasticsearch/bin/elasticsearch-plugin list | grep x-pack'
   register: es_xpack_installed
   changed_when: False
   failed_when: "'ERROR' in es_xpack_installed.stdout"
   check_mode: no
 
-- name: Remove x-pack plugin if Elasticsearch version has changed
+- name: Remove x-pack plugin if Elasticsearch version has changed.
   shell: '/usr/share/elasticsearch/bin/elasticsearch-plugin remove x-pack'
   register: es_xpack_state
   failed_when: "'ERROR' in es_xpack_state.stdout"
   changed_when: es_xpack_state.rc == 0
+  notify: 'Ensure Elasticsearch service is enabled.'
   when:
     - es_xpack_installed.rc == 0
     - es_update is changed
 
-- name: Download x-pack plugin from elastic.co
+- name: Download x-pack plugin from elastic.
   get_url:
     url: '{{ elastic_plugin_url }}/x-pack/x-pack-{{ elastic_version }}.zip'
     dest: '/tmp/x-pack-{{ elastic_version }}.zip'
     timeout: '30'
     validate_certs: 'no'
-  when:
-    - es_xpack_installed.rc == 1 or es_update is changed
+  when: es_xpack_installed.rc == 1 or es_update is changed
 
-- name: Install x-pack plugin from elastic.co
+- name: Install x-pack plugin from elastic.
   become: yes
   shell: '/usr/share/elasticsearch/bin/elasticsearch-plugin install --silent --batch file:///tmp/x-pack-{{ elastic_version }}.zip'
-  register: es_xpack_state
-  until: es_xpack_state is succeeded
+  notify: 'Ensure Elasticsearch service is enabled.'
   retries: 3
   delay: 2
-  when:
-    - es_xpack_installed.rc == 1 or es_update is changed
+  when: es_xpack_installed.rc == 1 or es_update is changed
 
-- name: Remove x-pack plugin local file
+- name: Remove x-pack plugin local file.
   file:
     state: 'absent'
     path: '/tmp/x-pack-{{ elastic_version }}.zip'
-  when:
-    - es_xpack_installed.rc == 1 or es_update is changed
+  when: es_xpack_installed.rc == 1 or es_update is changed

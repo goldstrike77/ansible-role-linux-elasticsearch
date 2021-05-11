@@ -34,5 +34,6 @@
     disable_gpg_check: 'yes'
   register: es_update
   until: es_update is succeeded
+  notify: 'Ensure Elasticsearch service is enabled.'
   retries: 5
   delay: 2
