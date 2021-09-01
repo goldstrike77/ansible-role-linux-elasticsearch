@@ -6,7 +6,7 @@
   set_fact:
     elastic_servers: "\
       {% set _elastic_servers = [] %}\
-      {% for host in groups[group_names[-1]] %}\
+      {% for host in groups[group_names[0]] %}\
         {% set _elastic_cluster = elastic_cluster | default('', true) %}\
         {% if ( _elastic_cluster == elastic_cluster) %}\
           {% if _elastic_servers.append(hostvars[host]['ansible_host']) %}{% endif %}\
