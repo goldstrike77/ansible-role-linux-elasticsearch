@@ -1,6 +1,6 @@
 ---
 elastic_repo_name: 'elasticsearch'
-elastic_artifacts_repo_url: "http://mirrors.tuna.tsinghua.edu.cn/elasticstack/{{ elastic_version.split('.')[0] }}.x/yum/"
+elastic_artifacts_repo_url: "http://mirrors.aliyun.com/elasticstack/{{ elastic_version.split('.')[0] }}.x/yum/"
 elastic_dependent_packages:
   - { package: 'python-pip' }
   - { package: 'libselinux-utils' }

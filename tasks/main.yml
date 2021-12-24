@@ -15,6 +15,9 @@
       {{ _elastic_servers }}"
   when: elastic_servers is not defined or elastic_servers | length < 1
 
+- name: Include tasks for specific OS.
+  include: '{{ ansible_os_family }}.yml'
+
 - name: Check if Elasticsearch data exists.
   stat:
     path: '{{ elastic_path }}/elasticsearch/nodes'
@@ -22,8 +25,6 @@
 
 - name: Elasticsearch operation.
   block:
-    - name: Include tasks for specific OS.
-      include: '{{ ansible_os_family }}.yml'
     - name: Include firewall tasks.
       include: 'firewall.yml'
     - name: Configuration the elasticsearch.
